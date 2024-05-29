@@ -1,0 +1,40 @@
+name: feature/zm_ai_pack
+on:
+  push:
+    #branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+defaults:
+  run:
+    shell: pwsh
+jobs:
+  main-win:
+    name: Test on Windows
+    runs-on: windows-latest
+    continue-on-error: true
+    steps:
+      - name: Check out files
+        uses: actions/checkout@v4
+       # token: ${{ secrets.CHECKOUT_ACCESS_SECRET }} #used for gitea runner
+        with:
+          lfs: false
+        # with:
+        #   ssh-key: ${{ secrets.CHECKOUT_SECRET }}
+      - name: Setup gsc-tool
+        uses: xensik/setup-gsc-tool@v1
+        with:
+          version: 1.4.4
+          #seperate compiling mods to make errors easier to spot
+          #use a powershell script to compile all mods, by recursively compiling scripts, since errors are only shown
+          #when compiling single scripts, instead of compiling a folder of scripts
+      - name: Compile mp_player_model_pack
+        run: |
+         & .github/scripts/gsc-tool-processing.ps1 ./mp_player_model_pack
+      - name: Compile zm_ai_pack
+        run: |
+         & .github/scripts/gsc-tool-processing.ps1 ./zm_ai_pack
+      - name: Compile zm_coolweps
+        run: |
+         & .github/scripts/gsc-tool-processing.ps1 ./zm_coolweps
