@@ -1,4 +1,4 @@
-name: feature/zm_ai_pack
+name: feature/zm_ai_pack_workflow
 on:
   push:
     #branches: [ "main" ]
