@@ -330,8 +330,14 @@ body
 	ai_zombie_crawl_jump_up_2_climb
 //	ai_zombie_jump_up_2_climb_coast
 //	ai_zombie_crawl_jump_up_2_climb_coast
+//!!custom
 	ai_zombie_traverse_garage_roll
-
+	ai_hazmat_sprint
+	ai_zombie_base_supersprint_bo4_v1
+	ai_zombie_base_supersprint_bo4_v2
+	ai_zombie_base_supersprint_tranzit_fair_v1
+	ai_zombie_sprint_v4
+	ai_zombie_sprint_v5
 
 
 } // end body

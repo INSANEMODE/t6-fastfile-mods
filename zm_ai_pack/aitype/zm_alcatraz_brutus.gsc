@@ -51,7 +51,9 @@ main()
     self.demolockonviewpitchmax2 = 60;
     self.demolockonviewpitchmin1 = -15;
     self.demolockonviewpitchmin2 = -5;
-    self.footstepfxtable = "zm_brutus_footstepfxtable";
+    self.footstepfxtable = "zm_mechz_footstepfxtable";
+    //self.footstepprepend = "fly_step_mechz";
+    // self.footstepfxtable = "zm_brutus_footstepfxtable";
     self.footstepprepend = "fly_step_brutus";
     self.footstepscriptcallback = 1;
     self.grenadeammo = 0;

@@ -340,6 +340,12 @@ reference_anims_from_animtree()
     dummy_anim_ref = %ai_zombie_crawl_jump_up_grabbed_48;
     dummy_anim_ref = %ai_zombie_crawl_traverse_48;
     dummy_anim_ref = %ai_zombie_traverse_48;
+    dummy_anim_ref = %ai_hazmat_sprint;
+	dummy_anim_ref = %ai_zombie_base_supersprint_bo4_v1;
+	dummy_anim_ref = %ai_zombie_base_supersprint_bo4_v2;
+	dummy_anim_ref = %ai_zombie_base_supersprint_tranzit_fair_v1;
+	dummy_anim_ref = %ai_zombie_sprint_v4;
+	dummy_anim_ref = %ai_zombie_sprint_v5;
 }
 
 main()

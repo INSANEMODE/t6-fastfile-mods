@@ -74,7 +74,7 @@ material,mc/mtl_p6_zm_al_magic_box_lock_red
 xmodel,p6_anim_zm_al_magic_box_lock_red
 
 fx,maps/zombie_alcatraz/fx_alcatraz_brutus_footstomp
-footstepfxtable,zm_brutus_footstepfxtable
+//footstepfxtable,zm_brutus_footstepfxtable
 footsteptable,fly_step_brutus
 image,~~-gmtl_t6_wpn_grenade_smoke_~29d4d932
 image,mtl_t6_wpn_grenade_smoke_nml

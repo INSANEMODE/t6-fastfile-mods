@@ -33,7 +33,11 @@ command_thread()
 	for (;;)
 	{
 		level waittill( "say", message, player, is_hidden );
-
+		if(GetDvarInt("zm_ai_pack_debug") <= 0)
+		{
+			wait 0.001;
+			continue;
+		}
 		args = strTok( message, " " );
 
 		is_server = args[ 0 ] == "s";

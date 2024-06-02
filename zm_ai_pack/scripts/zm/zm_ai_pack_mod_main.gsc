@@ -43,9 +43,9 @@ main()
 	// level.ai_data[ "screecher" ].main = maps\mp\zombies\_zm_ai_screecher::main;
 	// level.ai_data[ "screecher" ].init = maps\mp\zombies\_zm_ai_screecher::init;
 	// level.ai_data[ "screecher" ].should_execute = !( level.script == "zm_transit" && level.gametype == "zclassic" );
-	// level.ai_data[ "ghost" ] = sys::spawnstruct();
-	// level.ai_data[ "ghost" ].main = maps\mp\zombies\_zm_ai_ghost::main;
-	// level.ai_data[ "ghost" ].should_execute = !( level.script == "zm_buried" && level.gametype == "zclassic" );
+	level.ai_data[ "ghost" ] = sys::spawnstruct();
+	level.ai_data[ "ghost" ].main = maps\mp\zombies\_zm_ai_ghost::main;
+	level.ai_data[ "ghost" ].should_execute = !( level.script == "zm_buried" && level.gametype == "zclassic" );
 	level.ai_data[ "leaper" ] = sys::spawnstruct();
 	level.ai_data[ "leaper" ].main = maps\mp\zombies\_zm_ai_leaper::main;
 	level.ai_data[ "leaper" ].should_execute = level.script != "zm_highrise";
@@ -55,10 +55,10 @@ main()
 	level.ai_data[ "mechz" ] = sys::spawnstruct();
 	level.ai_data[ "mechz" ].main = maps\mp\zombies\_zm_ai_mechz::main;
 	level.ai_data[ "mechz" ].init = maps\mp\zombies\_zm_ai_mechz::init;
-	level.ai_data[ "mechz" ].should_execute = level.script != "zm_tomb";
+	level.ai_data[ "mechz" ].should_execute = (level.script != "zm_tomb");
 	level.ai_data[ "zombie_dog" ] = sys::spawnstruct();
 	level.ai_data[ "zombie_dog" ].init = maps\mp\zombies\_zm_ai_dogs::init;
-	level.ai_data[ "zombie_dog" ].should_execute = level.gametype != "zstandard" ;	
+	level.ai_data[ "zombie_dog" ].should_execute = (level.gametype != "zstandard") ;	
 
 	keys = getArrayKeys( level.ai_data );
 	for ( i = 0; i < keys.size; i++ )

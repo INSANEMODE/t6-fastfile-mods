@@ -456,7 +456,7 @@ body
 	ai_zombie_crawl_jump_down_bus_hatch_from_b
 	ai_zombie_crawl_jump_down_bus_hatch_from_f
 
-ai_zombie_bus_front_window_climbup_from_inside
+	ai_zombie_bus_front_window_climbup_from_inside
 	ai_zombie_bus_rear_window_climbup_from_inside
 
 	ai_zombie_sprint_v6
@@ -513,5 +513,12 @@ ai_zombie_bus_front_window_climbup_from_inside
 	//ai_zombie_crawl_riotshield_loop_v8
 	ai_zombie_crawl_riotshield_breakthrough_v1
 	//ai_zombie_crawl_riotshield_breakthrough_v2 
+
+	ai_hazmat_sprint
+	ai_zombie_base_supersprint_bo4_v1
+	ai_zombie_base_supersprint_bo4_v2
+	ai_zombie_base_supersprint_tranzit_fair_v1
+	ai_zombie_sprint_v4
+	ai_zombie_sprint_v5
 	
 } // end body

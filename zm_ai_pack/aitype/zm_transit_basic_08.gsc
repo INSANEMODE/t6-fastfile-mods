@@ -5,7 +5,7 @@
 #include character\c_zom_zombie8_02;
 #include character\c_zom_zombie8_03;
 
-#using_animtree("zm_transit_basic");
+#using_animtree("zm_all_basic");
 
 reference_anims_from_animtree()
 {
@@ -438,6 +438,12 @@ reference_anims_from_animtree()
     dummy_anim_ref = %ai_zombie_riotshield_breakthrough_v1;
     dummy_anim_ref = %ai_zombie_crawl_riotshield_loop_v1;
     dummy_anim_ref = %ai_zombie_crawl_riotshield_breakthrough_v1;
+    dummy_anim_ref = %ai_hazmat_sprint;
+	dummy_anim_ref = %ai_zombie_base_supersprint_bo4_v1;
+	dummy_anim_ref = %ai_zombie_base_supersprint_bo4_v2;
+	dummy_anim_ref = %ai_zombie_base_supersprint_tranzit_fair_v1;
+	dummy_anim_ref = %ai_zombie_sprint_v4;
+	dummy_anim_ref = %ai_zombie_sprint_v5;
 }
 
 main()
@@ -494,7 +500,7 @@ spawner()
 precache( ai_index )
 {
     level thread reference_anims_from_animtree();
-    sys::precacheanimstatedef( ai_index, #animtree, "zm_transit_basic" );
+    sys::precacheanimstatedef( ai_index, #animtree, "zm_all_basic" );
     character\c_zom_zombie8_01::precache();
     character\c_zom_zombie8_02::precache();
     character\c_zom_zombie8_03::precache();

@@ -587,6 +587,19 @@ sndbrutusloopwatcher( ent )
 
 brutus_health_increases()
 {
+	if(!isdefined(level.brutus_health))
+	{
+			level.brutus_health = 500;
+	level.brutus_health_increase = 1000;
+	}
+	if(!isdefined(level.brutus_health_increase))
+	{
+		level.brutus_health_increase = 1000;
+	}
+	if(!isdefined(level.brutus_explosive_damage_increase))
+	{
+		level.brutus_explosive_damage_increase = 600;
+	}
 	a_players = sys::getplayers();
 	n_player_modifier = 1;
 

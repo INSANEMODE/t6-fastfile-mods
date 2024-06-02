@@ -125,6 +125,16 @@ get_leaper_count()
 	return get_leaper_array().size;
 }
 
+get_ghost_array()
+{
+	return get_zombies_by_animname( "ghost_zombie" );
+}
+
+get_ghost_count()
+{
+	return get_ghost_array().size;
+}
+
 get_all_ai_array()
 {
 	return getaispeciesarray( level.zombie_team, "all" );

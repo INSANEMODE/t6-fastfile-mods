@@ -7,27 +7,27 @@
 >level.ipak_read,dlczm3
 >level.ipak_read,dlczm4
 
-//include,zm_all_basic
+include,zm_all_basic
 
-//include,buried/zm_buried_basic_no_anims
+include,buried/zm_buried_basic_no_anims
 include,buried/zm_buried_ghost
 //include,buried/zm_buried_sloth
 
-//include,highrise/zm_highrise_basic_no_anims
+include,highrise/zm_highrise_basic_no_anims
 include,highrise/zm_highrise_leaper
 
-//include,nuked/zm_nuked_basic_no_anims
+include,nuked/zm_nuked_basic_no_anims
 //include,nuked/zm_nuked_dog
 
-//include,prison/zm_alcatraz_basic_no_anims
+include,prison/zm_alcatraz_basic_no_anims
 include,prison/zm_alcatraz_brutus
 
-//include,tomb/zm_tomb_basic_no_anims
+include,tomb/zm_tomb_basic_no_anims
 //include,tomb/zm_tomb_giant_robot
 include,tomb/zm_tomb_mech_zombie
 
 include,transit/zm_transit_avogadro
-//include,transit/zm_transit_basic_no_anims
+include,transit/zm_transit_basic_no_anims
 include,transit/zm_transit_screecher
 include,transit/zombie_dog
 
@@ -85,6 +85,7 @@ script,scripts/zm/zm_ai_pack/mixed_presets/_wave.gsc
 script,scripts/zm/zm_ai_pack/mixed_variants/_brutus_wave.gsc
 script,scripts/zm/zm_ai_pack/mixed_variants/_dog_wave.gsc
 script,scripts/zm/zm_ai_pack/mixed_variants/_leaper_wave.gsc
+//script,scripts/zm/zm_ai_pack/mixed_variants/_ghost_wave.gsc
 script,scripts/zm/zm_ai_pack/mixed_variants/_mechz_wave.gsc
 script,scripts/zm/zm_ai_pack/mixed_variants/_normal_wave.gsc
 script,scripts/zm/zm_ai_pack/mixed_variants/_random.gsc
@@ -97,3 +98,12 @@ script,scripts/zm/zm_prison/zm_ai_pack_mod_zm_prison_main.gsc
 script,scripts/zm/zm_buried/zm_ai_pack_mod_zm_buried_main.gsc
 script,scripts/zm/zm_highrise/zm_ai_pack_mod_zm_highrise_main.gsc
 script,scripts/zm/zm_transit/zm_ai_pack_mod_zm_transit_main.gsc
+
+//busted ass engine doesn't support overriding mapents
+//comworld,maps/mp/zm_buried.d3dbsp
+//comworld,maps/mp/zm_highrise.d3dbsp
+//comworld,maps/mp/zm_nuked2.d3dbsp
+//comworld,maps/mp/zm_prison.d3dbsp
+//comworld,maps/mp/zm_tomb.d3dbsp
+//comworld,maps/mp/zm_transit.d3dbsp
+include,zm_ports

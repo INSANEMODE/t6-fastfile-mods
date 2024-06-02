@@ -761,6 +761,12 @@ reference_anims_from_animtree()
 	dummy_anim_ref = %ai_zombie_acid_stun_c;
 	dummy_anim_ref = %ai_zombie_acid_stun_d;
 	dummy_anim_ref = %ai_zombie_acid_stun_e;
+	dummy_anim_ref = %ai_hazmat_sprint;
+	dummy_anim_ref = %ai_zombie_base_supersprint_bo4_v1;
+	dummy_anim_ref = %ai_zombie_base_supersprint_bo4_v2;
+	dummy_anim_ref = %ai_zombie_base_supersprint_tranzit_fair_v1;
+	dummy_anim_ref = %ai_zombie_sprint_v4;
+	dummy_anim_ref = %ai_zombie_sprint_v5;
 }
 
 main()

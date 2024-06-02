@@ -1,6 +1,13 @@
-script,aitype/zm_transit_basic_01.gsc
+
 rawfile,animtrees/zm_transit_basic.atr
 rawfile,animstatedefs/zm_transit_basic.asd
+script,aitype/zm_transit_basic_01.gsc
+script,aitype/zm_transit_basic_02.gsc
+script,aitype/clientscripts/zm_transit_basic_02.csc
+script,aitype/zm_transit_basic_03.gsc
+script,aitype/clientscripts/zm_transit_basic_03.csc
+script,aitype/zm_transit_basic_09.gsc
+script,aitype/clientscripts/zm_transit_basic_09.csc
 script,character/c_zom_zombie1_01.gsc
 techniqueset,mc_sw4_3d_char_cloth_4z8fq5wu
 image,~~-gc_zom_zombie1_body_s-rgb&~fc459790

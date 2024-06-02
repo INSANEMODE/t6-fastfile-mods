@@ -53,14 +53,12 @@ zm_idle_crawl : notify idle_anim
 
 zm_move_walk : notify move_anim
 {
-	ai_zombie_walk_v1
-	ai_zombie_walk_v2
-	ai_zombie_walk_v3
-	ai_zombie_walk_v4
-	ai_zombie_walk_v6
-	ai_zombie_walk_v7
-	ai_zombie_walk_v9
-	ai_zombie_walk_v9
+	ai_zombie_walk_fast_v1
+	ai_zombie_walk_fast_v2
+	ai_zombie_walk_fast_v3
+	ai_zombie_run_v2
+	ai_zombie_run_v4
+	ai_zombie_run_v3
 }
 
 zm_move_walk_crawl : missing_legs notify move_anim
@@ -75,12 +73,8 @@ zm_move_walk_crawl : missing_legs notify move_anim
 
 zm_move_run : notify move_anim
 {
-	ai_zombie_walk_fast_v1
-	ai_zombie_walk_fast_v2
-	ai_zombie_walk_fast_v3
-	ai_zombie_run_v2
-	ai_zombie_run_v4
-	ai_zombie_run_v3
+	ai_zombie_sprint_v1
+	ai_zombie_sprint_v2
 }
 
 zm_move_run_crawl : missing_legs notify move_anim
@@ -95,9 +89,10 @@ zm_move_run_crawl : missing_legs notify move_anim
 
 zm_move_sprint : notify move_anim
 {
-	ai_zombie_sprint_v1
-	ai_zombie_sprint_v2
+	ai_zombie_fast_sprint_01
+	ai_zombie_fast_sprint_02
 }
+
 
 zm_move_sprint_crawl : missing_legs notify move_anim
 {
@@ -108,9 +103,16 @@ zm_move_sprint_crawl : missing_legs notify move_anim
 
 zm_move_super_sprint : notify move_anim
 {
+	ai_hazmat_sprint
+	ai_zombie_base_supersprint_bo4_v1
+	ai_zombie_base_supersprint_bo4_v2
+	ai_zombie_base_supersprint_tranzit_fair_v1
 	ai_zombie_fast_sprint_01
 	ai_zombie_fast_sprint_02
+	ai_zombie_sprint_v4
+	ai_zombie_sprint_v5
 }
+
 
 zm_move_super_sprint_crawl : missing_legs notify move_anim
 {
@@ -796,6 +798,7 @@ zm_traverse : aliased restart notify traverse_anim
 	dock_mid_way_jump_up_climb		ai_zombie_jump_up_dock_middle
 	dock_tommygun_dropdown			ai_zombie_jump_down_dock_tommygun
 */
+	prison_gondola_traversal			ai_zombie_traverse_lower_gondola 
 
 	// zm_highrise specific traversals
 	dierise_traverse_1_high_to_low	ai_zombie_traverse_dierise_1_high_to_low
@@ -981,7 +984,7 @@ zm_traverse_crawl : aliased restart missing_legs notify traverse_anim
 
 	jump_up_grabbed_48_crawl					ai_zombie_crawl_jump_up_grabbed_48
 	traverse_48_crawl				ai_zombie_crawl_traverse_48
-	traverse_garage_door_crawl		ai_zombie_crawl
+	//traverse_garage_door_crawl		ai_zombie_crawl
 /*
 	// zm_highrise specific traversals
 	dierise_traverse_1_high_to_low_crawl	ai_zombie_crawl_traverse_dierise_1_high_to_low

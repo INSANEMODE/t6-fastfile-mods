@@ -97,10 +97,13 @@ init()
 {
 	maps\mp\zombies\_zm_ai_mechz_ffotd::mechz_init_start();
 	level.mechz_spawners = sys::getentarray( "mechz_spawner", "script_noteworthy" );
-
+	assert(isdefined(level.mechz_spawners) );
 	if ( level.mechz_spawners.size == 0 )
+	{
+		assertmsg("level.mechz_spawners.size == 0");
 		return;
 
+	}
 	for ( i = 0; i < level.mechz_spawners.size; i++ )
 	{
 		level.mechz_spawners[i].is_enabled = 1;
@@ -174,7 +177,7 @@ init()
 	{
 		scriptmodelsuseanimtree( #animtree );
 	}
-/#
+	/#
 	setup_devgui();
 #/
 	maps\mp\zombies\_zm_ai_mechz_ffotd::mechz_init_end();
@@ -453,7 +456,7 @@ mechz_set_starting_health()
 	{
 		self.maxhealth = level.mechz_health;
 	}
-	
+
 	self.helmet_dmg = 0;
 	self.helmet_dmg_for_removal = self.maxhealth * level.mechz_helmet_health_percentage;
 	self.powerplant_cover_dmg = 0;
@@ -461,7 +464,7 @@ mechz_set_starting_health()
 	self.powerplant_dmg = 0;
 	self.powerplant_dmg_for_destroy = self.maxhealth * level.mechz_powerplant_destroyed_health_percentage;
 	level.mechz_explosive_dmg_to_cancel_claw = self.maxhealth * level.mechz_explosive_dmg_to_cancel_claw_percentage;
-/#
+	/#
 	if ( getdvarint( #"_id_E7121222" ) > 0 )
 	{
 		println( "\\nMZ: MechZ Starting Health: " + self.maxhealth );
@@ -535,7 +538,7 @@ mechz_spawn()
 
 	if ( !isdefined( spawn_pos ) )
 	{
-/#
+		/#
 		println( "ERROR: Tried to spawn mechz with no mechz spawn_positions!\\n" );
 		iprintln( "ERROR: Tried to spawn mechz with no mechz spawn_positions!" );
 #/
@@ -593,7 +596,7 @@ get_closest_mechz_spawn_pos( org )
 		}
 	}
 
-/#
+	/#
 	if ( !isdefined( best_pos ) )
 		println( "Error: Mechz could not find a valid jump pos from position ( " + self.origin[0] + ", " + self.origin[1] + ", " + self.origin[2] + " )" );
 #/
@@ -658,12 +661,24 @@ jump_pos_used_cooldown()
 
 mechz_health_increases()
 {
+	if(!isdefined(level.mechz_base_health))
+	{
+		level.mechz_base_health= 5000;
+	}
+	if(!isdefined(level.mechz_health))
+	{
+		level.mechz_health= level.mechz_base_health;
+	}
+	if(!isdefined(level.mechz_health_increase))
+	{
+		level.mechz_health_increase= 1000;
+	}
 	a_players = sys::getplayers();
 	n_player_modifier = 1;
 
 	if ( a_players.size > 1 )
 		n_player_modifier = a_players.size * 0.75;
-
+		
 	level.mechz_health = int( n_player_modifier * ( level.mechz_base_health + level.mechz_health_increase * level.special_round_count ) );
 
 	if ( level.mechz_health >= 22500 * n_player_modifier )
@@ -806,7 +821,7 @@ mechz_stun( time )
 	self mechz_claw_detach();
 	wait 0.05;
 	self.not_interruptable = 1;
-/#
+	/#
 	if ( getdvarint( #"_id_E7121222" ) > 1 )
 		println( "\\nMZ: Stun setting not interruptable\\n" );
 #/
@@ -820,7 +835,7 @@ mechz_stun( time )
 	}
 
 	self.not_interruptable = 0;
-/#
+	/#
 	if ( getdvarint( #"_id_E7121222" ) > 1 )
 		println( "\\nMZ: Stun clearing not interruptable\\n" );
 #/
@@ -833,7 +848,7 @@ mechz_tank_hit_callback()
 	if ( isdefined( self.mechz_hit_by_tank ) && self.mechz_hit_by_tank )
 		return;
 
-/#
+	/#
 	if ( getdvarint( #"_id_E7121222" ) > 1 )
 		println( "\\nMZ: Tank damage setting not interruptable\\n" );
 #/
@@ -858,7 +873,7 @@ mechz_tank_hit_callback()
 
 	self sys::animscripted( self.origin, self.angles, "zm_tank_hit_out" );
 	self maps\mp\animscripts\zm_shared::donotetracks( "pain_anim" );
-/#
+	/#
 	if ( getdvarint( #"_id_E7121222" ) > 1 )
 		println( "\\nMZ: Tank damage clearing not interruptable\\n" );
 #/
@@ -893,7 +908,7 @@ mechz_robot_stomp_callback()
 	self.not_interruptable = 1;
 	self.robot_stomped = 1;
 	self mechz_interrupt();
-/#
+	/#
 	if ( getdvarint( #"_id_E7121222" ) > 1 )
 		println( "\\nMZ: Robot stomp setting not interruptable\\n" );
 #/
@@ -916,7 +931,7 @@ mechz_robot_stomp_callback()
 
 	self sys::animscripted( self.origin, self.angles, "zm_robot_hit_out" );
 	self maps\mp\animscripts\zm_shared::donotetracks( "jump_anim" );
-/#
+	/#
 	if ( getdvarint( #"_id_E7121222" ) > 1 )
 		println( "\\nMZ: Robot stomp clearing not interruptable\\n" );
 #/
@@ -954,19 +969,19 @@ mechz_get_closest_valid_player()
 
 	switch ( players.size )
 	{
-		case 0:
-			return undefined;
-		case 1:
-			return players[0];
-		default:
-			if ( isdefined( level.closest_player_override ) )
-				player = [[ level.closest_player_override ]]( self.origin, players );
-			else if ( isdefined( level.calc_closest_player_using_paths ) && level.calc_closest_player_using_paths )
-				player = get_closest_player_using_paths( self.origin, players );
-			else
-				player = getclosest( self.origin, players );
+	case 0:
+		return undefined;
+	case 1:
+		return players[0];
+	default:
+		if ( isdefined( level.closest_player_override ) )
+			player = [[ level.closest_player_override ]]( self.origin, players );
+		else if ( isdefined( level.calc_closest_player_using_paths ) && level.calc_closest_player_using_paths )
+			player = get_closest_player_using_paths( self.origin, players );
+		else
+			player = getclosest( self.origin, players );
 
-			return player;
+		return player;
 	}
 }
 
@@ -1198,7 +1213,7 @@ mechz_find_flesh()
 
 	while ( true )
 	{
-/#
+		/#
 		if ( isdefined( self.force_behavior ) && self.force_behavior )
 		{
 			wait 0.05;
@@ -1208,7 +1223,7 @@ mechz_find_flesh()
 
 		if ( isdefined( self.not_interruptable ) && self.not_interruptable )
 		{
-/#
+			/#
 			if ( getdvarint( #"_id_E7121222" ) > 1 )
 				println( "\\nMZ: Not thinking since a behavior has set not_interruptable\\n" );
 #/
@@ -1218,7 +1233,7 @@ mechz_find_flesh()
 
 		if ( isdefined( self.is_traversing ) && self.is_traversing )
 		{
-/#
+			/#
 			if ( getdvarint( #"_id_E7121222" ) > 1 )
 				println( "\\nMZ: Not thinking since mech is traversing\\n" );
 #/
@@ -1228,7 +1243,7 @@ mechz_find_flesh()
 
 		player = [[ self.closest_player_override ]]();
 		self mechz_set_locomotion_speed();
-/#
+		/#
 		if ( getdvarint( #"_id_E7121222" ) > 1 )
 			println( "\\nMZ: Doing think\\n" );
 #/
@@ -1236,7 +1251,7 @@ mechz_find_flesh()
 
 		if ( !isdefined( player ) )
 		{
-/#
+			/#
 			if ( getdvarint( #"_id_E7121222" ) > 1 )
 				println( "\\n\\tMZ: No Enemy, idling\\n" );
 #/
@@ -1255,7 +1270,7 @@ mechz_find_flesh()
 			{
 				if ( isdefined( self.jump_pos ) && self mechz_in_range_for_jump() )
 				{
-/#
+					/#
 					if ( getdvarint( #"_id_E7121222" ) > 1 )
 						println( "\\n\\tMZ: Enemy on moving tank, do jump out and jump in when tank is stationary\\n" );
 #/
@@ -1263,7 +1278,7 @@ mechz_find_flesh()
 				}
 				else
 				{
-/#
+					/#
 					if ( getdvarint( #"_id_E7121222" ) > 1 )
 						println( "\\n\\tMZ: Enemy on moving tank, Jump Requested, going to jump pos\\n" );
 #/
@@ -1283,7 +1298,7 @@ mechz_find_flesh()
 			}
 			else
 			{
-/#
+				/#
 				if ( getdvarint( #"_id_E7121222" ) > 1 )
 					println( "\\n\\tMZ: Enemy on tank, targetting a tank pos\\n" );
 #/
@@ -1298,10 +1313,10 @@ mechz_find_flesh()
 				{
 					closest_tank_tag = level.vh_tank [[ func ]]( self, self.origin );
 				}
-			
+
 				if ( !isdefined( closest_tank_tag ) )
 				{
-/#
+					/#
 					if ( getdvarint( #"_id_E7121222" ) > 1 )
 						println( "\\n\\tMZ: Enemy on tank, no closest tank pos found, continuing\\n" );
 #/
@@ -1313,7 +1328,7 @@ mechz_find_flesh()
 
 				if ( abs( self.origin[2] - closest_tank_tag_pos[2] ) >= level.mechz_custom_goalradius || sys::distance2dsquared( self.origin, closest_tank_tag_pos ) >= level.mechz_custom_goalradius_sq )
 				{
-/#
+					/#
 					if ( getdvarint( #"_id_E7121222" ) > 1 )
 						println( "\\n\\tMZ: Enemy on tank, setting tank pos as goal\\n" );
 #/
@@ -1323,7 +1338,7 @@ mechz_find_flesh()
 
 					if ( isDefined( entity_on_tank_func ) && !player [[ entity_on_tank_func ]]() )
 					{
-/#
+						/#
 						if ( getdvarint( #"_id_E7121222" ) > 1 )
 							println( "\\n\\tMZ: Enemy got off tank by the time we reached our goal, continuing\\n" );
 #/
@@ -1333,7 +1348,7 @@ mechz_find_flesh()
 
 				if ( abs( self.origin[2] - closest_tank_tag_pos[2] ) < level.mechz_custom_goalradius && sys::distance2dsquared( self.origin, closest_tank_tag_pos ) < level.mechz_custom_goalradius_sq )
 				{
-/#
+					/#
 					if ( getdvarint( #"_id_E7121222" ) > 1 )
 						println( "\\n\\tMZ: Enemy on tank, reached tank pos, doing flamethrower sweep\\n" );
 #/
@@ -1351,7 +1366,7 @@ mechz_find_flesh()
 				self mechz_do_jump();
 			else
 			{
-/#
+				/#
 				if ( getdvarint( #"_id_E7121222" ) > 1 )
 					println( "\\n\\tMZ: Jump Requested, going to jump pos\\n" );
 #/
@@ -1363,7 +1378,7 @@ mechz_find_flesh()
 		}
 		else if ( self.zombie_move_speed == "sprint" && isdefined( player ) )
 		{
-/#
+			/#
 			if ( getdvarint( #"_id_E7121222" ) > 1 )
 				println( "\\n\\tMZ: Sprinting\\n" );
 #/
@@ -1374,7 +1389,7 @@ mechz_find_flesh()
 		}
 		else if ( sys::distancesquared( self.origin, player.origin ) < level.mechz_aggro_dist_sq )
 		{
-/#
+			/#
 			if ( getdvarint( #"_id_E7121222" ) > 1 )
 				println( "\\n\\tMZ: Player very close, switching to melee only\\n" );
 #/
@@ -1391,7 +1406,7 @@ mechz_find_flesh()
 			continue;
 		}
 
-/#
+		/#
 		if ( getdvarint( #"_id_E7121222" ) > 1 )
 			println( "\\n\\tMZ: No special behavior valid, heading after player\\n" );
 #/
@@ -1449,7 +1464,7 @@ mechz_launch_armor_piece()
 
 	if ( !isdefined( self.armor_state ) || self.next_armor_piece >= self.armor_state.size )
 	{
-/#
+		/#
 		println( "Trying to launch armor piece after all pieces have already been launched!" );
 #/
 		return;
@@ -1571,7 +1586,7 @@ mechz_damage_override( inflictor, attacker, damage, flags, meansofdeath, weapon,
 	{
 		while ( old_health_tier > new_health_tier )
 		{
-/#
+			/#
 			if ( getdvarint( #"_id_E7121222" ) > 0 )
 				println( "\\nMZ: Old tier: " + old_health_tier + "   New Health Tier: " + new_health_tier + "   Launching armor piece" );
 #/
@@ -1642,7 +1657,7 @@ mechz_damage_override( inflictor, attacker, damage, flags, meansofdeath, weapon,
 		{
 			attacker add_to_player_score( level.mechz_points_for_powerplant );
 		}
-		
+
 	}
 	else if ( !( isdefined( self.powerplant_covered ) && self.powerplant_covered ) && ( isdefined( self.has_powerplant ) && self.has_powerplant ) && self.powerplant_dmg >= self.powerplant_dmg_for_destroy )
 	{
@@ -1653,7 +1668,7 @@ mechz_damage_override( inflictor, attacker, damage, flags, meansofdeath, weapon,
 			self sys::playsound( "zmb_ai_mechz_destruction" );
 	}
 
-/#
+	/#
 	if ( getdvarint( #"_id_E7121222" ) > 0 )
 	{
 		println( "\\nMZ: Doing " + final_damage + " damage to mechz,   Health Remaining: " + self.health );
@@ -1699,7 +1714,7 @@ mechz_set_locomotion_speed()
 	else if ( isdefined( self.force_sprint ) && self.force_sprint )
 		self.zombie_move_speed = "sprint";
 	else if ( isDefined( entity_on_tank_func ) && isdefined( self.favoriteenemy ) && self.favoriteenemy [[ entity_on_tank_func ]]() && isdefined( level.vh_tank ) && level.vh_tank ent_flag( "tank_activated" ) )
-	    self.zombie_move_speed = "run";
+		self.zombie_move_speed = "run";
 	else if ( isdefined( self.favoriteenemy ) && sys::distancesquared( self.origin, self.favoriteenemy.origin ) > level.mechz_dist_for_sprint )
 		self.zombie_move_speed = "run";
 	else if ( !( isdefined( self.has_powerplant ) && self.has_powerplant ) )

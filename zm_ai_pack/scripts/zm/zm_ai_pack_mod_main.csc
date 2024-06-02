@@ -1,6 +1,6 @@
 #include clientscripts\mp\zombies\_zm_ai_avogadro;
 #include clientscripts\mp\zombies\_zm_ai_screecher;
-#include clientscripts\mp\zombies\_zm_ai_ghost;
+//#include clientscripts\mp\zombies\_zm_ai_ghost;
 #include clientscripts\mp\zombies\_zm_ai_brutus;
 #include clientscripts\mp\zombies\_zm_ai_mechz;
 
@@ -17,9 +17,9 @@ main()
 	// level.ai_data[ "screecher" ] = spawnStruct();
 	// level.ai_data[ "screecher" ].main = clientscripts\mp\zombies\_zm_ai_screecher::main;
 	// level.ai_data[ "screecher" ].should_execute = !( level.script == "zm_transit" && level.gametype == "zclassic" );
-	// level.ai_data[ "ghost" ] = spawnStruct();
-	// level.ai_data[ "ghost" ].main = clientscripts\mp\zombies\_zm_ai_ghost::main;
-	// level.ai_data[ "ghost" ].should_execute = !( level.script == "zm_buried" && level.gametype == "zclassic" );
+	level.ai_data[ "ghost" ] = spawnStruct();
+	level.ai_data[ "ghost" ].main = clientscripts\mp\zombies\_zm_ai_ghost::main;
+	level.ai_data[ "ghost" ].should_execute = !( level.script == "zm_buried" && level.gametype == "zclassic" );
 	level.ai_data[ "brutus" ] = spawnStruct();
 	level.ai_data[ "brutus" ].main = clientscripts\mp\zombies\_zm_ai_brutus::main;
 	level.ai_data[ "brutus" ].should_execute = level.script != "zm_prison";

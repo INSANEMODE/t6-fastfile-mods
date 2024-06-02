@@ -2863,3 +2863,28 @@ draw_debug_box( origin, mins, maxs, yaw, color, time )
 	}
 #/
 }
+
+
+get_favorite_enemy()
+{
+	ghost_targets = sys::getplayers();
+	least_hunted = ghost_targets[0];
+
+	for ( i = 0; i < ghost_targets.size; i++ )
+	{
+		if ( !isdefined( ghost_targets[i].hunted_by ) )
+			ghost_targets[i].hunted_by = 0;
+
+		if ( !is_player_valid( ghost_targets[i] ) )
+			continue;
+
+		if ( !is_player_valid( least_hunted ) )
+			least_hunted = ghost_targets[i];
+
+		if ( ghost_targets[i].hunted_by < least_hunted.hunted_by )
+			least_hunted = ghost_targets[i];
+	}
+
+	least_hunted.hunted_by = least_hunted.hunted_by + 1;
+	return least_hunted;
+}

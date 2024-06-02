@@ -402,5 +402,15 @@ body
 	ai_zombie_crawl_jump_up_grabbed_48
 	ai_zombie_crawl_traverse_48
 	ai_zombie_traverse_48
+
+
+	//!!custom
+	ai_zombie_traverse_garage_roll
+	ai_hazmat_sprint
+	ai_zombie_base_supersprint_bo4_v1
+	ai_zombie_base_supersprint_bo4_v2
+	ai_zombie_base_supersprint_tranzit_fair_v1
+	ai_zombie_sprint_v4
+	ai_zombie_sprint_v5
 	
-} // end body
+} // end body
