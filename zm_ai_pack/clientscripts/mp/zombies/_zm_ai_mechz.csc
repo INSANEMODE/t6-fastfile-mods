@@ -100,7 +100,7 @@ register_burn_overlay()
 
 init()
 {
-	registerclientfield( "actor", "mechz_fx", 14000, 12, "int", ::mechz_handle_fx );
+	//registerclientfield( "actor", "mechz_fx", 14000, 12, "int", ::mechz_handle_fx );
 	add_fx_element( 0, "maps/zombie_tomb/fx_tomb_mech_dmg_armor", "J_Knee_Attach_LE" );
 	add_fx_element( 0, "maps/zombie_tomb/fx_tomb_mech_dmg_sparks", "J_Knee_Attach_LE", 0.25, 0.75 );
 	add_fx_element( 0, "maps/zombie_tomb/fx_tomb_mech_dmg_steam", "J_Knee_Attach_LE", 0.1, 0.3 );
@@ -126,7 +126,7 @@ init()
 	add_fx_element( 9, "maps/zombie_tomb/fx_tomb_mech_jump_landing", "tag_origin" );
 	add_fx_element( 10, "maps/zombie_tomb/fx_tomb_mech_dmg_armor_face", "J_Helmet" );
 	add_fx_element( 11, "maps/zombie_tomb/fx_tomb_mech_head_light", "tag_headlamp_FX" );
-	registerclientfield( "toplayer", "mechz_grab", 14000, 1, "int", ::mechz_claw_callback );
+	//registerclientfield( "toplayer", "mechz_grab", 14000, 1, "int", ::mechz_claw_callback );
 	registermechzfootstepcb( "zm_tomb_mech_zombie", ::mechzfootstepcbfunc );
 	level._effect["mech_footstep_steam"] = loadfx( "maps/zombie_tomb/fx_tomb_mech_foot_step_steam" );
 	level._effect["mech_exhaust_smoke"] = loadfx( "maps/zombie_tomb/fx_tomb_mech_exhaust_smoke" );

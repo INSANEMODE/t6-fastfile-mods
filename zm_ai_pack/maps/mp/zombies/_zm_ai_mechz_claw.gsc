@@ -52,7 +52,9 @@ mechz_claw_release( bopenclaw )
 		{
 			if ( level.script == "zm_tomb" )
 			{
-				self.e_grabbed setclientfieldtoplayer( "mechz_grab", 0 );
+				//self.e_grabbed setclientfieldtoplayer( "mechz_grab", 0 );
+				self.e_grabbed set_clientfield_alt_toplayer( "mechz_grab", self.e_grabbed, 0 );
+
 			}
 			else
 			{
@@ -174,7 +176,9 @@ claw_grapple()
 	self.fx_field = self.fx_field | 256;
 	if ( level.script == "zm_tomb" )
 	{
-		self setclientfield( "mechz_fx", self.fx_field );
+		//self setclientfield( "mechz_fx", self.fx_field );
+		set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+
 	}
 	else
 	{
@@ -229,7 +233,9 @@ claw_grapple()
 					self.e_grabbed = player;
 					if ( level.script == "zm_tomb" )
 					{
-						self.e_grabbed setclientfieldtoplayer( "mechz_grab", 1 );
+						//self.e_grabbed setclientfieldtoplayer( "mechz_grab", 1 );
+						self.e_grabbed set_clientfield_alt_toplayer( "mechz_grab", self.e_grabbed, 1 );
+
 					}
 					else
 					{
@@ -310,7 +316,9 @@ claw_grapple()
 	self.fx_field = self.fx_field & ~256;
 	if ( level.script == "zm_tomb" )
 	{
-		self setclientfield( "mechz_fx", self.fx_field );
+		//self setclientfield( "mechz_fx", self.fx_field );
+		set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+
 	}
 	else
 	{
@@ -590,7 +598,9 @@ mechz_claw_cleanup()
 	self.fx_field = self.fx_field & ~64;
 	if ( level.script == "zm_tomb" )
 	{
-		self setclientfield( "mechz_fx", self.fx_field );
+		//self setclientfield( "mechz_fx", self.fx_field );
+		set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+
 	}
 	else
 	{

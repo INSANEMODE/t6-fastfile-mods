@@ -167,8 +167,8 @@ init()
 	flag_init( "mechz_claw_move_complete" );
 	if ( level.script == "zm_tomb" )
 	{
-		registerclientfield( "actor", "mechz_fx", 14000, 12, "int" );
-		registerclientfield( "toplayer", "mechz_grab", 14000, 1, "int" );
+		//registerclientfield( "actor", "mechz_fx", 14000, 12, "int" );
+		//registerclientfield( "toplayer", "mechz_grab", 14000, 1, "int" );
 	}
 
 	level thread init_flamethrower_triggers();
@@ -224,7 +224,9 @@ clear_one_off_fx( fx_id )
 	self.fx_field = self.fx_field & ~fx_id;
 	if ( level.script == "zm_tomb" )
 	{
-		self setclientfield( "mechz_fx", self.fx_field );
+		//self setclientfield( "mechz_fx", self.fx_field );
+		set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+
 	}
 	else
 	{
@@ -254,7 +256,9 @@ traversal_booster_fx_watcher()
 		}
 		if ( level.script == "zm_tomb" )
 		{
-			self setclientfield( "mechz_fx", self.fx_field );
+			//self setclientfield( "mechz_fx", self.fx_field );
+			set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+
 		}
 		else
 		{
@@ -298,7 +302,9 @@ booster_fx_watcher()
 		}
 		if ( level.script == "zm_tomb" )
 		{
-			self setclientfield( "mechz_fx", self.fx_field );
+			//self setclientfield( "mechz_fx", self.fx_field );
+			set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+
 		}
 		else
 		{
@@ -322,7 +328,8 @@ flamethrower_fx_watcher()
 
 		if ( level.script == "zm_tomb" )
 		{
-			self setclientfield( "mechz_fx", self.fx_field );
+			//self setclientfield( "mechz_fx", self.fx_field );
+			set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
 		}
 		else
 		{
@@ -336,7 +343,9 @@ fx_cleanup()
 	self.fx_field = 0;
 	if ( level.script == "zm_tomb" )
 	{
-		self setclientfield( "mechz_fx", self.fx_field );
+		//self setclientfield( "mechz_fx", self.fx_field );
+		set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+
 	}
 	else
 	{
@@ -678,7 +687,7 @@ mechz_health_increases()
 
 	if ( a_players.size > 1 )
 		n_player_modifier = a_players.size * 0.75;
-		
+
 	level.mechz_health = int( n_player_modifier * ( level.mechz_base_health + level.mechz_health_increase * level.special_round_count ) );
 
 	if ( level.mechz_health >= 22500 * n_player_modifier )
@@ -702,7 +711,9 @@ mechz_death()
 	self.fx_field = 0;
 	if ( level.script == "zm_tomb" )
 	{
-		self setclientfield( "mechz_fx", self.fx_field );
+		//self setclientfield( "mechz_fx", self.fx_field );
+		set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+
 	}
 	else
 	{
@@ -1476,7 +1487,9 @@ mechz_launch_armor_piece()
 	self.fx_field = self.fx_field | 1 << self.armor_state[self.next_armor_piece].index;
 	if ( level.script == "zm_tomb" )
 	{
-		self setclientfield( "mechz_fx", self.fx_field );
+		//self setclientfield( "mechz_fx", self.fx_field );
+		set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+
 	}
 	else
 	{
@@ -1613,7 +1626,8 @@ mechz_damage_override( inflictor, attacker, damage, flags, meansofdeath, weapon,
 		self.fx_field = self.fx_field & ~2048;
 		if ( level.script == "zm_tomb" )
 		{
-			self setclientfield( "mechz_fx", self.fx_field );
+			set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+			//self setclientfield( "mechz_fx", self.fx_field );
 		}
 		else
 		{

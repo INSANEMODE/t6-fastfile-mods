@@ -14,6 +14,8 @@
 #include maps\mp\zombies\_zm_powerups;
 #include maps\mp\zombies\_zm_ai_basic;
 
+#include scripts\zm\clientfield_alt_sys;
+
 precache()
 {
 
@@ -275,10 +277,16 @@ init_ghost_zone()
 register_client_fields()
 {
 	registerclientfield( "actor", "ghost_impact_fx", 12000, 1, "int" );
-	registerclientfield( "actor", "ghost_fx", 12000, 3, "int" );
-	registerclientfield( "actor", "sndGhostAudio", 12000, 3, "int" );
-	registerclientfield( "scriptmover", "ghost_fx", 12000, 3, "int" );
-	registerclientfield( "scriptmover", "sndGhostAudio", 12000, 3, "int" );
+	scripts\zm\clientfield_alt_sys::register_clientfield_alt( "actor", "ghost_fx" );
+	scripts\zm\clientfield_alt_sys::register_clientfield_alt( "actor", "sndGhostAudio" );
+
+	//registerclientfield( "actor", "ghost_fx", 12000, 3, "int" );
+	//registerclientfield( "actor", "sndGhostAudio", 12000, 3, "int" );
+	scripts\zm\clientfield_alt_sys::register_clientfield_alt( "scriptmover", "ghost_fx" );
+	scripts\zm\clientfield_alt_sys::register_clientfield_alt( "scriptmover", "sndGhostAudio" );
+
+	//registerclientfield( "scriptmover", "ghost_fx", 12000, 3, "int" );
+	//registerclientfield( "scriptmover", "sndGhostAudio", 12000, 3, "int" );
 	registerclientfield( "world", "ghost_round_light_state", 12000, 1, "int" );
 }
 
@@ -368,7 +376,8 @@ ghost_zone_spawning_think()
 
 		if ( isdefined( ghost_ai ) )
 		{
-			ghost_ai setclientfield( "ghost_fx", 3 );
+			//ghost_ai setclientfield( "ghost_fx", 3 );
+			set_clientfield_alt_allplayers( "ghost_fx",ghost_ai, 3 );
 			ghost_ai.spawn_point = spawn_point;
 			ghost_ai.is_ghost = 1;
 			ghost_ai.is_spawned_in_ghost_zone = 1;
@@ -802,7 +811,8 @@ ghost_death_func()
 	self stoploopsound( 1 );
 	self sys::playsound( "zmb_ai_ghost_death" );
 	self setclientfield( "ghost_impact_fx", 1 );
-	self setclientfield( "ghost_fx", 1 );
+	//self setclientfield( "ghost_fx", 1 );
+	set_clientfield_alt_allplayers( "ghost_fx",self, 1 );
 	self thread prepare_to_die();
 
 	if ( isdefined( self.extra_custom_death_logic ) )
@@ -887,7 +897,7 @@ ghost_think()
 	{
 		self setclientfield( "slowgun_fx", 0 );
 	}
-	self setclientfield( "sndGhostAudio", 1 );
+	set_clientfield_alt_allplayers( "sndGhostAudio",self, 1 );
 	self init_thinking();
 
 	if ( isdefined( self.need_script_move ) && self.need_script_move )
@@ -1071,7 +1081,8 @@ start_script_move()
 	self.script_mover.angles = self.angles;
 	self sys::linkto( self.script_mover );
 	self.state = "script_move_update";
-	self setclientfield( "ghost_fx", 4 );
+	//self setclientfield( "ghost_fx", 4 );
+	set_clientfield_alt_allplayers( "ghost_fx",self, 4 );
 	player = self.favoriteenemy;
 
 	if ( is_player_valid( player ) )
@@ -1141,8 +1152,9 @@ script_move_update()
 			self.script_mover.angles = desired_angles;
 			self remove_script_mover();
 			wait_network_frame();
-			self setclientfield( "ghost_fx", 3 );
-			self setclientfield( "sndGhostAudio", 1 );
+			//self setclientfield( "ghost_fx", 3 );
+			set_clientfield_alt_allplayers( "ghost_fx",self, 3 );
+			set_clientfield_alt_allplayers( "sndGhostAudio",self, 1 );
 			wait_network_frame();
 			self start_chase();
 			return;
@@ -1207,7 +1219,8 @@ start_chase()
 	self set_zombie_run_cycle( "run" );
 	self sys::setanimstatefromasd( "zm_move_run" );
 	self.state = "chase_update";
-	self setclientfield( "ghost_fx", 4 );
+	//self setclientfield( "ghost_fx", 4 );
+	set_clientfield_alt_allplayers( "ghost_fx",self, 4 );
 }
 
 chase_update()
@@ -1295,7 +1308,8 @@ need_wait()
 start_wait()
 {
 	self sys::setanimstatefromasd( "zm_idle" );
-	self setclientfield( "ghost_fx", 4 );
+	//self setclientfield( "ghost_fx", 4 );
+	set_clientfield_alt_allplayers( "ghost_fx",self, 4 );
 	self.state = "wait_update";
 }
 
@@ -1328,14 +1342,16 @@ wait_update()
 		if ( self getanimstatefromasd() != "zm_move_run" )
 			self sys::setanimstatefromasd( "zm_move_run" );
 
-		self setclientfield( "ghost_fx", 4 );
+		//self setclientfield( "ghost_fx", 4 );
+		set_clientfield_alt_allplayers( "ghost_fx",self, 4 );
 		self start_runaway();
 	}
 }
 
 start_evaporate( need_deletion )
 {
-	self setclientfield( "ghost_fx", 5 );
+	//self setclientfield( "ghost_fx", 5 );
+	set_clientfield_alt_allplayers( "ghost_fx",self, 5 );
 	wait 0.1;
 
 	if ( isdefined( need_deletion ) && need_deletion )
@@ -1502,7 +1518,8 @@ can_drain_points( self_pos, target_pos )
 
 set_chase_status( move_speed )
 {
-	self setclientfield( "ghost_fx", 4 );
+	//self setclientfield( "ghost_fx", 4 );
+	set_clientfield_alt_allplayers( "ghost_fx",self, 4 );
 
 	if ( self.zombie_move_speed != move_speed )
 	{
@@ -1514,7 +1531,8 @@ set_chase_status( move_speed )
 start_drain()
 {
 	self sys::setanimstatefromasd( "zm_drain" );
-	self setclientfield( "ghost_fx", 2 );
+	//self setclientfield( "ghost_fx", 2 );
+	set_clientfield_alt_allplayers( "ghost_fx",self, 2 );
 	self.state = "drain_update";
 }
 
@@ -1547,7 +1565,8 @@ drain_update()
 		if ( self getanimstatefromasd() != "zm_move_run" )
 			self sys::setanimstatefromasd( "zm_move_run" );
 
-		self setclientfield( "ghost_fx", 4 );
+		//self setclientfield( "ghost_fx", 4 );
+		set_clientfield_alt_allplayers( "ghost_fx",self, 4 );
 		self start_runaway();
 	}
 }
@@ -2170,7 +2189,8 @@ outside_ghost_zone_spawning_think()
 
 			if ( isdefined( ghost_ai ) )
 			{
-				ghost_ai setclientfield( "ghost_fx", 3 );
+				//ghost_ai setclientfield( "ghost_fx", 3 );
+				set_clientfield_alt_allplayers( "ghost_fx",ghost_ai,  3 );
 				ghost_ai.spawn_point = spawn_point;
 				ghost_ai.is_ghost = 1;
 			}
@@ -2433,7 +2453,7 @@ spawn_ghost_round_presentation_ghost()
 	ghost.script_mover = sys::spawn( "script_origin", ghost.origin );
 	ghost.script_mover.angles = ghost.angles;
 	ghost sys::linkto( ghost.script_mover );
-	ghost setclientfield( "sndGhostAudio", 1 );
+	set_clientfield_alt_allplayers( "sndGhostAudio",ghost,  1 );
 }
 
 ghost_round_presentation_think()
@@ -2490,15 +2510,16 @@ ghost_switch_windows()
 	while ( true )
 	{
 		next_spot = get_next_spot_during_ghost_round_presentation();
-		self setclientfield( "ghost_fx", 5 );
-		self setclientfield( "sndGhostAudio", 0 );
+		//self setclientfield( "ghost_fx", 5 );
+		set_clientfield_alt_allplayers( "ghost_fx",self, 2 );
+		set_clientfield_alt_allplayers( "sndGhostAudio",self, 0 );
 		self sys::ghost();
 		self.script_mover moveto( next_spot.origin, 1 );
 		self.script_mover waittill( "movedone" );
 		self.script_mover.origin = next_spot.origin;
 		self.script_mover.angles = next_spot.angles;
-		self setclientfield( "ghost_fx", 3 );
-		self setclientfield( "sndGhostAudio", 1 );
+		set_clientfield_alt_allplayers( "ghost_fx",self, 3 );
+		set_clientfield_alt_allplayers( "sndGhostAudio",self, 1 );
 		self sys::show();
 		wait 6;
 	}
@@ -2536,7 +2557,8 @@ ghost_round_presentation_reset()
 	{
 		level.ghost_round_presentation_ghost.skip_death_notetracks = 1;
 		level.ghost_round_presentation_ghost.nodeathragdoll = 1;
-		level.ghost_round_presentation_ghost setclientfield( "ghost_fx", 5 );
+		//level.ghost_round_presentation_ghost setclientfield( "ghost_fx", 5 );
+		set_clientfield_alt_allplayers( "ghost_fx",level.ghost_round_presentation_ghost, 5 );
 		wait_network_frame();
 		level.ghost_round_presentation_ghost delete();
 		level.ghost_round_presentation_ghost = undefined;

@@ -276,7 +276,9 @@ mechz_do_jump( wait_for_stationary_tank )
 	self.fx_field_old = undefined;
 	if ( level.script == "zm_tomb" )
 	{
-		self setclientfield( "mechz_fx", self.fx_field );
+		//self setclientfield( "mechz_fx", self.fx_field );
+		set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+
 	}
 	else
 	{
