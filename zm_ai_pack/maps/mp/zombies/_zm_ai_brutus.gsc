@@ -652,17 +652,29 @@ get_brutus_spawn_pos_val( brutus_pos )
 		interaction_types = getarraykeys( level.interaction_types );
 		interact_array = level.interaction_types;
 
-		for ( i = 0; i < interaction_types.size; i++ )
+		for ( i = 0; isdefined(interaction_types) && i < interaction_types.size; i++ )
 		{
-			int_type = interaction_types[i];
-			interaction = interact_array[int_type];
-			interact_points = [[ interaction.get_func ]]( zone_name );
-
-			for ( j = 0; j < interact_points.size; j++ )
+			if(isdefined(interaction_types[i]))
 			{
-				if ( interact_points[j] [[ interaction.validity_func ]]() )
-					score = score + interaction.spawn_bias;
+				int_type = interaction_types[i];
+				if(isdefined(int_type))
+				{
+					interaction = interact_array[int_type];
+					if(isdefined(interaction))
+					{
+						interact_points = [[ interaction.get_func ]]( zone_name );
+
+						for ( j = 0; j < interact_points.size; j++ )
+						{
+							if ( interact_points[j] [[ interaction.validity_func ]]() )
+								score = score + interaction.spawn_bias;
+						}							
+					}
+					
+				}
+			
 			}
+
 		}
 	}
 
@@ -1115,7 +1127,7 @@ brutus_watch_for_non_afterlife_players()
 
 		foreach ( player in a_players )
 		{
-			if ( !( isdefined( player.afterlife ) && player.afterlife ) && !player maps\mp\zombies\_zm_laststand::player_is_in_laststand() )
+			if ( !( is_true(player.afterlife) ) && !player maps\mp\zombies\_zm_laststand::player_is_in_laststand() )
 				b_all_players_in_afterlife = 0;
 		}
 
@@ -1389,13 +1401,16 @@ get_priority_item_for_brutus( zone_name, do_secondary_zone_checks )
 {
 	interact_types = level.interaction_types;
 	interact_prio = level.interaction_priority;
-
-	for ( i = 0; i < interact_prio.size; i++ )
+	assert(isdefined(interact_types));
+	assert(isdefined(interact_prio));
+	for ( i = 0; isdefined(interact_prio) && i < interact_prio.size; i++ )
 	{
 		best_score = -1;
 		best_object = undefined;
 		int_type = interact_prio[i + ""];
 		int_struct = interact_types[int_type];
+		assert(isdefined(int_struct));
+		assert(isdefined(int_struct.get_func));
 		int_objects = self [[ int_struct.get_func ]]( zone_name );
 
 		if ( !isDefined( int_objects ) )
@@ -1403,10 +1418,12 @@ get_priority_item_for_brutus( zone_name, do_secondary_zone_checks )
 			continue;
 		}
 
-		for ( j = 0; j < int_objects.size; j++ )
+		for ( j = 0; isdefined(int_objects) && j < int_objects.size; j++ )
 		{
+			assert(isdefined(int_struct.validity_func));
 			if ( isDefined( int_objects[j] ) && int_objects[j] [[ int_struct.validity_func ]]() )
 			{
+				assert(isdefined(int_struct.value_func));
 				score = self [[ int_struct.value_func ]]( int_objects[j] );
 				assert( score >= 0 );
 
@@ -1427,9 +1444,12 @@ get_priority_item_for_brutus( zone_name, do_secondary_zone_checks )
 
 	if ( isdefined( do_secondary_zone_checks ) && do_secondary_zone_checks )
 	{
+		assert(isdefined(zone_name));
+		assert(isdefined(level.zones[zone_name]));
+		assert(isdefined(level.zones[zone_name].adjacent_zones));
 		adj_zone_names = getarraykeys( level.zones[zone_name].adjacent_zones );
 
-		for ( i = 0; i < adj_zone_names.size; i++ )
+		for ( i = 0; isdefined(adj_zone_names) && i < adj_zone_names.size; i++ )
 		{
 			if ( !maps\mp\zombies\_zm_zonemgr::zone_is_enabled( adj_zone_names[i] ) )
 				continue;
@@ -1442,7 +1462,7 @@ get_priority_item_for_brutus( zone_name, do_secondary_zone_checks )
 
 		global_zone_names = getarraykeys( level.zones );
 
-		for ( i = 0; i < global_zone_names.size; i++ )
+		for ( i = 0; isdefined(global_zone_names) && i < global_zone_names.size; i++ )
 		{
 			if ( global_zone_names[i] == zone_name )
 				continue;

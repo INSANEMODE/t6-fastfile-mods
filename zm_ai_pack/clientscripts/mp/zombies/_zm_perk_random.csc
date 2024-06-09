@@ -121,7 +121,11 @@ turn_on_active_light_red_alt( new_val )
         self setshaderconstant( 0, 1, self.artifact_glow_setting, 0, self.machinery_glow_setting, 0 );
     }
     else
-        stopfx( 0, self._active_glow_red );
+    {
+        if(isdefined(self._active_glow_red))
+            stopfx( 0, self._active_glow_red );
+    }
+        
 }
 // turn_on_active_light_red( localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump )
 // {
@@ -153,7 +157,10 @@ turn_on_active_light_green_alt( new_val )
         self setshaderconstant( 0, 1, self.artifact_glow_setting, 0, self.machinery_glow_setting, 0 );
     }
     else
-        stopfx( 0, self._active_glow_green );
+    {
+        if(isdefined(self._active_glow_green))
+            stopfx( 0, self._active_glow_green );
+    }
 }
 
 // turn_on_active_light_green( localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump )
@@ -187,7 +194,10 @@ turn_on_active_ball_light_alt( new_val )
         self setshaderconstant( 0, 1, self.artifact_glow_setting, 0, self.machinery_glow_setting, 0 );
     }
     else
-        stopfx( 0, self._ball_glow );
+    {
+        if(isdefined(self._ball_glow))
+            stopfx( 0, self._ball_glow );
+    }
 }
 
 // turn_on_active_ball_light( localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump )

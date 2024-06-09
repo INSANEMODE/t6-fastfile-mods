@@ -61,11 +61,27 @@ enable_dog_rounds()
 dog_spawner_init()
 {
 	level.dog_spawners = sys::getentarray( "zombie_dog_spawner", "script_noteworthy" );
+	if(isdefined(level.dog_spawners))
+	{
+		print("^2 level.dog_spawners defined");
+	}
 	later_dogs = sys::getentarray( "later_round_dog_spawners", "script_noteworthy" );
+		if(isdefined(later_dogs))
+	{
+		print("^2 later_dogs defined");
+	}
 	level.dog_spawners = arraycombine( level.dog_spawners, later_dogs, 1, 0 );
 
 	if ( level.dog_spawners.size == 0 )
+	{
+		print("^1 level.dog_spawners.size == 0");
 		return;
+	}
+	else if(!isdefined(level.dog_spawners) )
+	{
+		print("^1 level.dog_spawners not defined");
+	}
+
 
 	for ( i = 0; i < level.dog_spawners.size; i++ )
 	{

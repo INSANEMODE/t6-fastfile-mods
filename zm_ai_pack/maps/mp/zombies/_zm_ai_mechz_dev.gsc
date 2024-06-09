@@ -7,6 +7,7 @@
 #include maps\mp\animscripts\zm_utility;
 #include maps\mp\zombies\_zm_ai_mechz;
 #include maps\mp\animscripts\zm_shared;
+#include scripts\zm\clientfield_alt_sys;
 
 mechz_debug()
 {
@@ -340,7 +341,8 @@ mechz_force_flamethrower()
 			curr_aim_anim = 1;
 			self scripted_behavior( "zm_flamethrower_sweep", "flamethrower_anim" );
 			self.fx_field = self.fx_field | 64;
-			self setclientfield( "mechz_fx", self.fx_field );
+			set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
+			//self setclientfield( "mechz_fx", self.fx_field );
 		}
 		else
 		{
@@ -360,7 +362,8 @@ fake_launch_claw()
 	v_claw_origin = self sys::gettagorigin( "tag_claw" );
 	v_claw_angles = vectortoangles( self.origin - level.players[0].origin );
 	self.fx_field = self.fx_field | 256;
-	self setclientfield( "mechz_fx", self.fx_field );
+	// self setclientfield( "mechz_fx", self.fx_field );
+	set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
 	self.m_claw setanim( %ai_zombie_mech_grapple_arm_open_idle, 1, 0, 1 );
 	self.m_claw sys::unlink();
 	self.m_claw.fx_ent = sys::spawn( "script_model", self.m_claw sys::gettagorigin( "tag_claw" ) );
@@ -383,7 +386,8 @@ fake_launch_claw()
 	self.m_claw waittill( "movedone" );
 	self.m_claw.fx_ent delete();
 	self.fx_field = self.fx_field & ~256;
-	self setclientfield( "mechz_fx", self.fx_field );
+	//self setclientfield( "mechz_fx", self.fx_field );
+	set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
 	v_claw_origin = self sys::gettagorigin( "tag_claw" );
 	v_claw_angles = self sys::gettagangles( "tag_claw" );
 	self.m_claw.origin = v_claw_origin;
@@ -451,7 +455,8 @@ mechz_force_damage_armor()
 		self.next_armor_piece++;
 	}
 
-	self setclientfield( "mechz_fx", self.fx_field );
+	//self setclientfield( "mechz_fx", self.fx_field );
+	set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
 
 	while ( true )
 		self scripted_behavior( "zm_idle", "idle_anim" );
@@ -480,7 +485,8 @@ mechz_force_damage_faceplate()
 		self attach( "c_zom_mech_faceplate", "J_Helmet" );
 	}
 
-	self setclientfield( "mechz_fx", self.fx_field );
+	//self setclientfield( "mechz_fx", self.fx_field );
+	set_clientfield_alt_allplayers( "mechz_fx", self, self.fx_field );
 
 	while ( true )
 		self scripted_behavior( "zm_idle", "idle_anim" );

@@ -173,10 +173,10 @@ init()
 
 	level thread init_flamethrower_triggers();
 
-	if ( level.script != "zm_tomb" )
-	{
+	//if ( level.script != "zm_tomb" )
+	//{
 		scriptmodelsuseanimtree( #animtree );
-	}
+	//}
 	/#
 	setup_devgui();
 #/
@@ -423,7 +423,7 @@ mechz_attach_objects()
 		self.m_claw delete();
 		self.m_claw = undefined;
 	}
-
+	scriptmodelsuseanimtree( #animtree );
 	org = self sys::gettagorigin( "tag_claw" );
 	ang = self sys::gettagangles( "tag_claw" );
 	self.m_claw = sys::spawn( "script_model", org );

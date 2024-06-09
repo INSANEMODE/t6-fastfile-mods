@@ -54,13 +54,13 @@ init()
 	init_client_flag_callback_funcs();
 	//register_clientfield_alt( "toplayer", "mechz_grab", "int", ::mechz_claw_callback_alt );
 	//register_clientfield_alt( "actor", "mechz_fx", "int", ::mechz_handle_fx_alt );
-	register_clientfield_alt( "actor", "zombie_gut_explosion", "int", ::zombie_gut_explosion_cb_alt );
-	register_clientfield_alt( "actor", "zombie_ragdoll_explode", "int", ::zombie_ragdoll_explode_cb_alt );
-	register_clientfield_alt( "actor", "zombie_has_eyes", "int", ::zombie_eyes_clientfield_cb_alt );
+	//register_clientfield_alt( "actor", "zombie_gut_explosion", "int", ::zombie_gut_explosion_cb_alt );
+	//register_clientfield_alt( "actor", "zombie_ragdoll_explode", "int", ::zombie_ragdoll_explode_cb_alt );
+	//register_clientfield_alt( "actor", "zombie_has_eyes", "int", ::zombie_eyes_clientfield_cb_alt );
 
-	//registerclientfield( "actor", "zombie_has_eyes", 1, 1, "int", ::zombie_eyes_clientfield_cb, 0 );
-	//registerclientfield( "actor", "zombie_ragdoll_explode", 1, 1, "int", ::zombie_ragdoll_explode_cb, 0 );
-	//registerclientfield( "actor", "zombie_gut_explosion", 9000, 1, "int", ::zombie_gut_explosion_cb, 0 );
+	registerclientfield( "actor", "zombie_has_eyes", 1, 1, "int", ::zombie_eyes_clientfield_cb, 0 );
+	registerclientfield( "actor", "zombie_ragdoll_explode", 1, 1, "int", ::zombie_ragdoll_explode_cb, 0 );
+	registerclientfield( "actor", "zombie_gut_explosion", 9000, 1, "int", ::zombie_gut_explosion_cb, 0 );
 	registerclientfield( "world", "zombie_power_on", 1, 1, "int", ::zombie_power_clientfield_cb, 1 );
 	registerclientfield( "actor", "sndZombieContext", 9000, 1, "int", clientscripts\mp\zombies\_zm_audio::sndsetzombiecontext );
 	registerclientfield( "actor", "sndZombieContext", -12000, 1, "int", clientscripts\mp\zombies\_zm_audio::sndsetzombiecontext );
@@ -690,8 +690,8 @@ player_eyes_clientfield_cb( localclientnum, oldval, newval, bnewent, binitialsna
 	}
 
 	if ( !isdemoplaying() )
-		zombie_eyes_clientfield_cb_alt(newval);
-	//zombie_eyes_clientfield_cb( localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump );
+		//zombie_eyes_clientfield_cb_alt(newval);
+	zombie_eyes_clientfield_cb( localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump );
 	else
 		zombie_eyes_demo_clientfield_cb( localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump );
 }
@@ -714,8 +714,8 @@ player_eye_color_clientfield_cb( localclientnum, oldval, newval, bnewent, biniti
 			self._eyeglow_fx_override = level._effect["player_eye_glow_orng"];
 
 		if ( !isdemoplaying() )
-			zombie_eyes_clientfield_cb_alt(is_true( self.zombie_face ));
-		//zombie_eyes_clientfield_cb( localclientnum, 0, is_true( self.zombie_face ), bnewent, binitialsnap, fieldname, bwasdemojump );
+			//zombie_eyes_clientfield_cb_alt(is_true( self.zombie_face ));
+			zombie_eyes_clientfield_cb( localclientnum, 0, is_true( self.zombie_face ), bnewent, binitialsnap, fieldname, bwasdemojump );
 		else
 			zombie_eyes_demo_clientfield_cb( localclientnum, 0, is_true( self.zombie_face ), bnewent, binitialsnap, fieldname, bwasdemojump );
 	}
@@ -779,54 +779,54 @@ zombie_eyes_demo_clientfield_cb( localclientnum, oldval, newval, bnewent, biniti
 	self notify( "new_zombie_eye_cb" );
 	self thread zombie_eyes_demo_watcher( localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump );
 }
-zombie_eyes_clientfield_cb_alt( new_val )
-{
-	if ( !isdefined( self.zombie_eyes_clientfield_cb_alt_old_val ) )
-	{
-		self.zombie_eyes_clientfield_cb_alt_old_val = 0;
-	}
-	newval = int( new_val );
-	oldval = self.zombie_eyes_clientfield_cb_alt_old_val;
-	if ( getDvarInt( "clientfield_alt_zm_debug" ) )
-	{
-		print( "zombie_eyes_clientfield_cb_alt( " + oldval + ", " + newval + " )" );
-	}
-	if ( !isdefined( newval ) )
-		return;
-
-	if ( newval )
-	{
-		self createzombieeyes( 0 );
-		self mapshaderconstant( 0, 0, "scriptVector2", 0, get_eyeball_luminance(), self get_eyeball_color() );
-	}
-	else
-	{
-		self deletezombieeyes( 0 );
-		self mapshaderconstant( 0, 0, "scriptVector2", 0, 0.25, self get_eyeball_color() );
-	}
-
-	if ( isdefined( level.zombie_eyes_clientfield_cb_additional ) )
-		self [[ level.zombie_eyes_clientfield_cb_additional ]]( 0, 0, newval, 0, 0, 0, 0 );
-}
-// zombie_eyes_clientfield_cb( localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump )
+// zombie_eyes_clientfield_cb_alt( new_val )
 // {
+// 	if ( !isdefined( self.zombie_eyes_clientfield_cb_alt_old_val ) )
+// 	{
+// 		self.zombie_eyes_clientfield_cb_alt_old_val = 0;
+// 	}
+// 	newval = int( new_val );
+// 	oldval = self.zombie_eyes_clientfield_cb_alt_old_val;
+// 	if ( getDvarInt( "clientfield_alt_zm_debug" ) )
+// 	{
+// 		print( "zombie_eyes_clientfield_cb_alt( " + oldval + ", " + newval + " )" );
+// 	}
 // 	if ( !isdefined( newval ) )
 // 		return;
 
 // 	if ( newval )
 // 	{
-// 		self createzombieeyes( localclientnum );
-// 		self mapshaderconstant( localclientnum, 0, "scriptVector2", 0, get_eyeball_luminance(), self get_eyeball_color() );
+// 		self createzombieeyes( 0 );
+// 		self mapshaderconstant( 0, 0, "scriptVector2", 0, get_eyeball_luminance(), self get_eyeball_color() );
 // 	}
 // 	else
 // 	{
-// 		self deletezombieeyes( localclientnum );
-// 		self mapshaderconstant( localclientnum, 0, "scriptVector2", 0, 0.25, self get_eyeball_color() );
+// 		self deletezombieeyes( 0 );
+// 		self mapshaderconstant( 0, 0, "scriptVector2", 0, 0.25, self get_eyeball_color() );
 // 	}
 
 // 	if ( isdefined( level.zombie_eyes_clientfield_cb_additional ) )
-// 		self [[ level.zombie_eyes_clientfield_cb_additional ]]( localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump );
+// 		self [[ level.zombie_eyes_clientfield_cb_additional ]]( 0, 0, newval, 0, 0, 0, 0 );
 // }
+zombie_eyes_clientfield_cb( localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump )
+{
+	if ( !isdefined( newval ) )
+		return;
+
+	if ( newval )
+	{
+		self createzombieeyes( localclientnum );
+		self mapshaderconstant( localclientnum, 0, "scriptVector2", 0, get_eyeball_luminance(), self get_eyeball_color() );
+	}
+	else
+	{
+		self deletezombieeyes( localclientnum );
+		self mapshaderconstant( localclientnum, 0, "scriptVector2", 0, 0.25, self get_eyeball_color() );
+	}
+
+	if ( isdefined( level.zombie_eyes_clientfield_cb_additional ) )
+		self [[ level.zombie_eyes_clientfield_cb_additional ]]( localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump );
+}
 
 get_eyeball_luminance()
 {

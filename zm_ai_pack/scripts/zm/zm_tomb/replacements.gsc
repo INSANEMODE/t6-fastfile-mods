@@ -27,11 +27,11 @@ ee_mechz_do_jump_override( s_spawn_pos )
     self endon( "death" );
     self endon( "kill_jump" );
 /#
-    if ( getdvarint( _hash_E7121222 ) > 0 )
+    if ( getdvarint( #"_id_E7121222" ) > 0 )
         println( "\\nMZ: Doing Jump-Teleport\\n" );
 #/
 /#
-    if ( getdvarint( _hash_E7121222 ) > 1 )
+    if ( getdvarint( #"_id_E7121222" ) > 1 )
         println( "\\nMZ: Jump setting not interruptable\\n" );
 #/
     self.not_interruptable = 1;
@@ -66,7 +66,7 @@ ee_mechz_do_jump_override( s_spawn_pos )
     self.not_interruptable = 0;
     self setfreecameralockonallowed( 1 );
 /#
-    if ( getdvarint( _hash_E7121222 ) > 1 )
+    if ( getdvarint( #"_id_E7121222" ) > 1 )
         println( "\\nMZ: Jump clearing not interruptable\\n" );
 #/
     mechz_jump_cleanup();
