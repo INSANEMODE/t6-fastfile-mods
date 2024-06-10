@@ -94,7 +94,7 @@ main()
 		level.brutus_spawners[i].script_forcespawn = 1;
 	}
 
-	setup_interaction_matrix();
+	level setup_interaction_matrix();
 
 	while ( !isdefined( level.struct_class_names ) )
 	{
@@ -150,7 +150,7 @@ main()
 	if ( !level.brutus_in_grief )
 	{
 		level thread get_brutus_interest_points();
-/#
+		/#
 		setup_devgui();
 #/
 		level.custom_perk_validation = ::check_perk_machine_valid;
@@ -224,7 +224,7 @@ init()
 	if ( !level.brutus_in_grief )
 	{
 		level thread maps\mp\zombies\_zm_ai_brutus::get_brutus_interest_points();
-/#
+		/#
 		setup_devgui();
 #/
 		level.custom_perk_validation = maps\mp\zombies\_zm_ai_brutus::check_perk_machine_valid;
@@ -235,6 +235,7 @@ init()
 
 setup_interaction_matrix()
 {
+	level.interaction_priority_max = 5;
 	level.interaction_types = [];
 	level.interaction_types["perk_machine"] = sys::spawnstruct();
 	level.interaction_types["perk_machine"].priority = 1;
@@ -248,6 +249,8 @@ setup_interaction_matrix()
 	level.interaction_types["perk_machine"].spawn_bias = 800;
 	level.interaction_types["perk_machine"].num_times_to_scale = 3;
 	level.interaction_types["perk_machine"].unlock_cost = 2000;
+	assert(isdefined(level.interaction_types), "level.interaction_types not defined");
+	assert(isdefined(level.interaction_types["perk_machine"]), "level.interaction_types[perk_machine] not defined");
 	if ( getDvar( "mapname" ) == "zm_prison" )
 	{
 		level.interaction_types["magic_box"] = sys::spawnstruct();
@@ -318,20 +321,29 @@ setup_interaction_matrix()
 	level.interaction_types["blocker"].value_func = ::get_dist_score;
 	level.interaction_types["blocker"].interact_func = ::blocker_smash;
 	level.interaction_types["blocker"].spawn_bias = 50;
+	assert(isdefined(level.interaction_types), "level.interaction_types not defined");
+	assert(isdefined(level.interaction_types["blocker"]), "level.interaction_types[blocker] not defined");
 	level.interaction_priority = [];
 	interaction_types = getarraykeys( level.interaction_types );
-
-	for ( i = 0; i < interaction_types.size; i++ )
+	assert(isdefined(interaction_types));
+	assert(isdefined(interaction_types) && interaction_types.size > 0);
+	for ( i = 1; isdefined(interaction_types) && i < 5; i++ )
 	{
+		if(!isdefined(interaction_types[i]))
+		{
+			break;
+		}
 		int_type = interaction_types[i];
+		assert(isdefined(int_type));
 		interaction = level.interaction_types[int_type];
+		assert(isdefined(interaction));
+		assert(isdefined(interaction.priority));
 		assert( !isdefined( level.interaction_priority[interaction.priority + ""] ) );
 		level.interaction_priority[interaction.priority + ""] = int_type;
 	}
-
-/#
-	for ( i = 0; i < interaction_types.size; i++ )
-		assert( isdefined( level.interaction_priority[i + ""] ) );
+	/#
+	for ( i = 1; isdefined(interaction_types) && i < level.interaction_priority_max; i++ )
+		assert( isdefined( level.interaction_priority[i + ""] ), i+" interaction is undefined" );
 #/
 }
 
@@ -431,7 +443,7 @@ brutus_spawn( starting_health, has_helmet, helmet_hits, explosive_dmg_taken, zon
 
 	if ( !isdefined( spawn_pos ) )
 	{
-/#
+		/#
 		println( "ERROR: Tried to spawn brutus with no brutus spawn_positions!\\n" );
 		iprintln( "ERROR: Tried to spawn brutus with no brutus spawn_positions!" );
 #/
@@ -589,8 +601,8 @@ brutus_health_increases()
 {
 	if(!isdefined(level.brutus_health))
 	{
-			level.brutus_health = 500;
-	level.brutus_health_increase = 1000;
+		level.brutus_health = 500;
+		level.brutus_health_increase = 1000;
 	}
 	if(!isdefined(level.brutus_health_increase))
 	{
@@ -649,8 +661,18 @@ get_brutus_spawn_pos_val( brutus_pos )
 
 	if ( !level.brutus_in_grief )
 	{
-		interaction_types = getarraykeys( level.interaction_types );
-		interact_array = level.interaction_types;
+		if(isdefined(level.interaction_types))
+		{
+			interaction_types = getarraykeys( level.interaction_types );
+			interact_array = level.interaction_types;
+
+		}
+		else
+		{
+			Assert(isdefined(level.interaction_types), "level.interaction_types is not defined");
+			return score;
+		}
+
 
 		for ( i = 0; isdefined(interaction_types) && i < interaction_types.size; i++ )
 		{
@@ -668,11 +690,11 @@ get_brutus_spawn_pos_val( brutus_pos )
 						{
 							if ( interact_points[j] [[ interaction.validity_func ]]() )
 								score = score + interaction.spawn_bias;
-						}							
+						}
 					}
-					
+
 				}
-			
+
 			}
 
 		}
@@ -998,7 +1020,7 @@ attempt_brutus_spawn( n_spawn_num )
 {
 	if ( level.brutus_count + n_spawn_num > level.brutus_max_count )
 	{
-/#
+		/#
 		iprintln( "Brutus max count reached - Preventing Brutus from spawning!" );
 #/
 		return false;
@@ -1031,7 +1053,7 @@ brutus_stop_basic_find_flesh()
 
 setup_devgui()
 {
-/#
+	/#
 	setdvar( "spawn_Brutus", "off" );
 	adddebugcommand( "devgui_cmd \"Zombies:2/Zombie Spawning:2/Spawn Zombie:1/Brutus:1\" \"spawn_Brutus on\"\n" );
 	level thread watch_devgui_brutus();
@@ -1040,7 +1062,7 @@ setup_devgui()
 
 watch_devgui_brutus()
 {
-/#
+	/#
 	while ( true )
 	{
 		if ( getdvar( #"_id_5E6F2932" ) == "on" )
@@ -1229,7 +1251,7 @@ brutus_stuck_watcher()
 		{
 			if ( !findpath( self.origin, self.goal_pos, self, true, false ) )
 			{
-/#
+				/#
 				println( "Brutus could not path to goal_pos " + self.goal_pos );
 #/
 				self.fail_count++;
@@ -1243,7 +1265,7 @@ brutus_stuck_watcher()
 		{
 			if ( !findpath( self.origin, self.goal_pos, self, true, false ) )
 			{
-/#
+				/#
 				println( "Brutus could not path to goal_pos " + self.goal_pos );
 #/
 				self.fail_count++;
@@ -1399,16 +1421,23 @@ zone_array_contains( zone_array, zone_name )
 
 get_priority_item_for_brutus( zone_name, do_secondary_zone_checks )
 {
+	assert(isdefined(zone_name), "^1zone_name Not Defined" );
+	//assert(isdefined(do_secondary_zone_checks), "^1do_secondary_zone_checks Not Defined" );
 	interact_types = level.interaction_types;
 	interact_prio = level.interaction_priority;
-	assert(isdefined(interact_types));
-	assert(isdefined(interact_prio));
-	for ( i = 0; isdefined(interact_prio) && i < interact_prio.size; i++ )
+	assert(isdefined(interact_types), "^1interact_types Not Defined" );
+	assert(isdefined(interact_prio), "^1interact_prio Not Defined" );
+	for ( i = 1; isdefined(interact_prio) && i < level.interaction_priority_max; i++ )
 	{
 		best_score = -1;
 		best_object = undefined;
+		if(!isdefined(interact_prio[i + ""]))
+		{
+			continue;
+		}
 		int_type = interact_prio[i + ""];
 		int_struct = interact_types[int_type];
+
 		assert(isdefined(int_struct));
 		assert(isdefined(int_struct.get_func));
 		int_objects = self [[ int_struct.get_func ]]( zone_name );
@@ -1512,6 +1541,16 @@ is_magic_box_valid()
 
 get_perk_machine_trigger()
 {
+	assert(isdefined(self), "self is not defined");
+	assert(isdefined(self.targetname), "Targetname is not defined");
+	if(!isdefined(self) )
+	{
+		return;
+	}
+	if(!isdefined(self.targetname) )
+	{
+		return;
+	}
 	if ( self.targetname == "vendingelectric_cherry" )
 		perk_machine = sys::getent( "vending_electriccherry", "target" );
 	else if ( self.targetname == "vending_deadshot_model" )
@@ -1531,7 +1570,12 @@ get_perk_machines( zone_name )
 is_perk_machine_valid()
 {
 	trigger = self get_perk_machine_trigger();
+	assert(isdefined(trigger));
+	if(!isdefined(trigger))
+	{
 
+		return false;
+	}
 	if ( isdefined( trigger.is_locked ) && trigger.is_locked )
 		return false;
 
@@ -1753,29 +1797,29 @@ snddointeractionvox( type )
 
 	switch ( type )
 	{
-		case "box_lock_anim":
-			alias = "vox_brutus_brutus_lockbox";
-			break;
-		case "perk_lock_anim":
-			alias = "vox_brutus_brutus_lockbox";
-			num = 5;
-			break;
-		case "table_smash_anim":
-			alias = "vox_brutus_brutus_lockbox";
-			num = 5;
-			break;
-		case "trap_smash_anim":
-			alias = "vox_brutus_brutus_lockbox";
-			num = 5;
-			break;
-		case "plane_lock_anim":
-			alias = "vox_brutus_brutus_lockbox";
-			num = 5;
-			break;
-		case "board_smash_anim":
-			alias = "vox_brutus_brutus_lockbox";
-			num = 5;
-			break;
+	case "box_lock_anim":
+		alias = "vox_brutus_brutus_lockbox";
+		break;
+	case "perk_lock_anim":
+		alias = "vox_brutus_brutus_lockbox";
+		num = 5;
+		break;
+	case "table_smash_anim":
+		alias = "vox_brutus_brutus_lockbox";
+		num = 5;
+		break;
+	case "trap_smash_anim":
+		alias = "vox_brutus_brutus_lockbox";
+		num = 5;
+		break;
+	case "plane_lock_anim":
+		alias = "vox_brutus_brutus_lockbox";
+		num = 5;
+		break;
+	case "board_smash_anim":
+		alias = "vox_brutus_brutus_lockbox";
+		num = 5;
+		break;
 	}
 
 	self thread sndbrutusvox( alias, num );
@@ -1890,14 +1934,14 @@ get_lock_hint_string( cost )
 {
 	switch ( cost )
 	{
-		case 2000:
-			return &"ZOMBIE_LOCKED_COST_2000";
-		case 4000:
-			return &"ZOMBIE_LOCKED_COST_4000";
-		case 6000:
-			return &"ZOMBIE_LOCKED_COST_6000";
-		default:
-			return &"ZOMBIE_LOCKED_COST";
+	case 2000:
+		return &"ZOMBIE_LOCKED_COST_2000";
+	case 4000:
+		return &"ZOMBIE_LOCKED_COST_4000";
+	case 6000:
+		return &"ZOMBIE_LOCKED_COST_6000";
+	default:
+		return &"ZOMBIE_LOCKED_COST";
 	}
 }
 
@@ -2336,7 +2380,7 @@ custom_brutus_flame_death_fx()
 	}
 	else
 	{
-/#
+		/#
 		println( "^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_death_torso\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_torso\"" );
 #/
 	}
@@ -2382,7 +2426,7 @@ custom_brutus_flame_death_fx()
 	}
 	else
 	{
-/#
+		/#
 		println( "^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_death_sm\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_zombie_md\"" );
 #/
 	}
@@ -2407,7 +2451,7 @@ custom_brutus_on_fire_timeout( a_script_origins )
 
 brutus_debug()
 {
-/#
+	/#
 	while ( true )
 	{
 		debug_level = getdvarint( #"_id_8DB11170" );
@@ -2537,7 +2581,7 @@ get_brutus_interest_points()
 	{
 		build_trap_array();
 	}
-	
+
 	flag_set( "brutus_setup_complete" );
 }
 
