@@ -1863,14 +1863,19 @@ brutus_fire_teargas_when_possible()
 	v_org_left = self sys::gettagorigin( "TAG_WEAPON_LEFT" );
 	v_org_right = self sys::gettagorigin( "TAG_WEAPON_RIGHT" );
 	self thread sndplaydelayedsmokeaudio( v_org_left, v_org_right );
-	if(isdefined( level.zombie_weapons["willy_pete_zm"] ))
+	if(isdefined( level.zombie_weapons["willy_pete2_zm"] ))
+	{
+		self magicgrenadetype( "willy_pete2_zm", v_org_left, ( 0, 0, 0 ), 0.4 );
+		self magicgrenadetype( "willy_pete2_zm", v_org_right, ( 0, 0, 0 ), 0.4 );
+	}
+	else if(isdefined( level.zombie_weapons["willy_pete_zm"] ))
 	{
 		self magicgrenadetype( "willy_pete_zm", v_org_left, ( 0, 0, 0 ), 0.4 );
 		self magicgrenadetype( "willy_pete_zm", v_org_right, ( 0, 0, 0 ), 0.4 );
 	}
 	else
 	{
-		print("_zm_ai_brutus: weapon willy_pete_zm is not included in this map.");
+		print("_zm_ai_brutus: weapon willy_pete2_zm and willy_pete_zm are not included in this map.");
 	}
 	self waittillmatch( "teargas_anim", "end" );
 	self.not_interruptable = 0;
@@ -2278,6 +2283,10 @@ brutus_damage_override( inflictor, attacker, damage, flags, meansofdeath, weapon
 		n_brutus_headshot_modifier = n_brutus_headshot_modifier * level.brutus_shotgun_damage_mod;
 	}
 
+	if (isdefined( weapon ) && weapon == "willy_pete2_zm")
+	{
+		return 0;
+	}
 	if ( isdefined( weapon ) && weapon == "bouncing_tomahawk_zm" && isdefined( inflictor ) )
 	{
 		self sys::playsound( "wpn_tomahawk_imp_zombie" );

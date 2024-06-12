@@ -1528,6 +1528,10 @@ mechz_damage_override( inflictor, attacker, damage, flags, meansofdeath, weapon,
 		n_mechz_headshot_modifier = n_mechz_headshot_modifier * level.mechz_shotgun_damage_mod;
 	}
 
+	if (isdefined( weapon ) && weapon == "willy_pete2_zm")
+	{
+		return 0;
+	}
 	if ( damage <= 10 )
 		n_mechz_damage_percent = 1.0;
 

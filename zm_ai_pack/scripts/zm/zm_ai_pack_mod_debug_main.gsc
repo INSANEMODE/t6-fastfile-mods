@@ -30,6 +30,8 @@ init()
 
 command_thread()
 {
+	level.server_commands = strtok("printorigin,points,setdoground,spawnmechz,spawnbrutus,printentities,gotoround,help", "," );
+	level.client_commands = strtok("printentities,help", ",");
 	for (;;)
 	{
 		level waittill( "say", message, player, is_hidden );
@@ -52,38 +54,41 @@ command_thread()
 			}
 			switch ( args[ 1 ] )
 			{
-				case "printorigin":
-					player iPrintLn( player.origin );
-					break;
-				case "points":
-					player.score = 1000000;
-					break;
-				case "setdoground":
-					level.next_dog_round = level.round_number + 1;
-					player iPrintLn( "Set next dog round to " + level.next_dog_round );
-					break;
-				case "spawnmechz":
-					player iPrintLn( "Spawning one mechz" );
-					level.mechz_left_to_spawn = 1;
-					level notify( "spawn_mechz" );
-					break;
-				case "spawnbrutus":
-					player iPrintLn( "Spawning one brutus" );
-					level notify( "spawn_brutus", 1 );
-					break;
-				case "printentities":
-					level thread print_entities();
-					break;
-				case "gotoround":
-					goto_round( int( args[ 2 ] ) );
-					break;
-				default:
-					player iPrintLn( "Invalid command" );
-					break;
+			case "printorigin":
+				player iPrintLn( player.origin );
+				break;
+			case "points":
+				player.score = 1000000;
+				break;
+			case "setdoground":
+				level.next_dog_round = level.round_number + 1;
+				player iPrintLn( "Set next dog round to " + level.next_dog_round );
+				break;
+			case "spawnmechz":
+				player iPrintLn( "Spawning one mechz" );
+				level.mechz_left_to_spawn = 1;
+				level notify( "spawn_mechz" );
+				break;
+			case "spawnbrutus":
+				player iPrintLn( "Spawning one brutus" );
+				level notify( "spawn_brutus", 1 );
+				break;
+			case "printentities":
+				level thread print_entities();
+				break;
+			case "gotoround":
+				goto_round( int( args[ 2 ] ) );
+				break;
+			case "help":
+				player print_help(is_server);
+				break;
+			default:
+				player iPrintLn( "Invalid command" );
+				break;
 			}
 		}
 		else if ( is_client )
-		{			
+		{
 			if ( !isDefined( args[ 1 ] ) )
 			{
 				player iPrintLn( "Missing second argument" );
@@ -91,9 +96,15 @@ command_thread()
 			}
 			switch ( args[ 1 ] )
 			{
-				case "printentities":
-					player setClientDvar( "say_notify", "printentities" );
-					break;
+			case "printentities":
+				player setClientDvar( "say_notify", "printentities" );
+				break;
+			case "help":
+				player print_help(is_server);
+				break;
+			default:
+				player iPrintLn( "Invalid command" );
+				break;
 			}
 		}
 		else
@@ -102,7 +113,26 @@ command_thread()
 		}
 	}
 }
+print_help(is_server)
+{
 
+	if(isdefined(is_server))
+	{
+		foreach(command in level.server_commands)
+		{
+			self IPrintLn(command);
+			wait 0.3;
+		}
+	}
+	else
+	{
+		foreach(command in level.client_commands)
+		{
+			self IPrintLn(command);
+			wait 0.3;
+		}
+	}
+}
 on_player_connect()
 {
 	while ( true )
@@ -356,7 +386,7 @@ draw_zombie_spawn_locations()
 			{
 				draw_specific_zombie_spawn_locations( zone.zombie_dog_locations, zkeys[ z ], ( 0.3, 0.8, 0.3 ), "zombie_dog" );
 			}
-			
+
 			draw_specific_zombie_spawn_locations( zone.screecher_locations, zkeys[ z ], ( 0, 0.8, 0.8 ), "screecher" );
 
 			draw_specific_zombie_spawn_locations( zone.avogadro_locations, zkeys[ z ], ( 0.3, 0.8, 0.8 ), "avogadro" );
@@ -494,18 +524,18 @@ draw_nodes()
 
 			switch ( node.type )
 			{
-				case "Begin":
-					color = ( 0, 0, 0.8 );
-					type = "begin";
-					break;
-				case "End":
-					color = ( 0, 0.8, 0 );
-					type = "end";
-					break;
-				case "Path":
-					color = ( 0.8, 0, 0 );
-					type = "path";
-					break;
+			case "Begin":
+				color = ( 0, 0, 0.8 );
+				type = "begin";
+				break;
+			case "End":
+				color = ( 0, 0.8, 0 );
+				type = "end";
+				break;
+			case "Path":
+				color = ( 0.8, 0, 0 );
+				type = "path";
+				break;
 			}
 
 			if ( throttle_count == throttle_at )
