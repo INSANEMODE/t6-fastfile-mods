@@ -1166,7 +1166,7 @@ brutus_stuck_teleport()
 	align_struct.angles = self.angles;
 	align_struct setmodel( "tag_origin" );
 
-	if ( !level.brutus_in_grief && ( self sys::istouching( level.e_gondola.t_ride ) || isdefined( self.force_gondola_teleport ) && self.force_gondola_teleport ) )
+	if ( !level.brutus_in_grief && ( isdefined(level.e_gondola.t_ride) && self sys::istouching( level.e_gondola.t_ride ) || isdefined( self.force_gondola_teleport ) && self.force_gondola_teleport ) )
 	{
 		self.force_gondola_teleport = 0;
 		align_struct sys::linkto( level.e_gondola );
@@ -1841,8 +1841,15 @@ brutus_fire_teargas_when_possible()
 	v_org_left = self sys::gettagorigin( "TAG_WEAPON_LEFT" );
 	v_org_right = self sys::gettagorigin( "TAG_WEAPON_RIGHT" );
 	self thread sndplaydelayedsmokeaudio( v_org_left, v_org_right );
-	self magicgrenadetype( "willy_pete_zm", v_org_left, ( 0, 0, 0 ), 0.4 );
-	self magicgrenadetype( "willy_pete_zm", v_org_right, ( 0, 0, 0 ), 0.4 );
+	if(isdefined( level.zombie_weapons["willy_pete_zm"] ))
+	{
+		self magicgrenadetype( "willy_pete_zm", v_org_left, ( 0, 0, 0 ), 0.4 );
+		self magicgrenadetype( "willy_pete_zm", v_org_right, ( 0, 0, 0 ), 0.4 );
+	}
+	else
+	{
+		print("_zm_ai_brutus: weapon willy_pete_zm is not included in this map.");
+	}
 	self waittillmatch( "teargas_anim", "end" );
 	self.not_interruptable = 0;
 }
