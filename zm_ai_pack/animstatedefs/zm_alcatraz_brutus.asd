@@ -110,3 +110,80 @@ zm_window_melee : restart notify window_melee_anim
 	ai_zombie_cellbreaker_attack_swingright_a
 	ai_zombie_cellbreaker_attack_swingright_b
 }
+
+zm_punch_fall_front : restart notify punch_fall_anim
+{
+	ai_zombie_thundergun_hit_faceplant
+	ai_zombie_thundergun_hit_deadfallknee
+	ai_zombie_thundergun_hit_forwardtoface
+}
+
+zm_punch_fall_front_crawl : restart notify punch_fall_anim
+{
+	ai_zombie_thundergun_hit_armslegsforward
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_forwardtoface	
+}
+
+zm_punch_fall_left : restart notify punch_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_right
+}
+
+zm_punch_fall_right : restart notify punch_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_left
+}
+	
+zm_punch_fall_back : restart notify punch_fall_anim
+{
+	ai_zombie_thundergun_hit_upontoback
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_flatonback
+	ai_zombie_thundergun_hit_armslegsforward
+}
+
+zm_punch_getup_back_default : restart notify punch_getup_anim
+{
+	ai_zombie_thundergun_getup
+}
+
+zm_punch_getup_back_early : restart notify punch_getup_anim
+{
+	ai_zombie_thundergun_sprinter_getup_b
+	ai_zombie_thundergun_sprinter_getup_c
+}
+	
+zm_punch_getup_back_late : restart notify punch_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_b
+	ai_zombie_thundergun_getup_quick_c
+}
+
+zm_punch_getup_belly_default : restart notify punch_getup_anim
+{
+	ai_zombie_thundergun_getup
+}
+
+zm_punch_getup_belly_early : restart notify punch_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_a
+}
+	
+zm_punch_getup_belly_late : restart notify punch_getup_anim
+{
+	ai_zombie_thundergun_sprinter_getup_a
+}
+
+zm_robot_hit_in : notify pain_anim
+{
+	ai_zombie_mech_injury_hit_by_footstep
+}
+zm_robot_hit_loop : notify pain_anim
+{
+	ai_zombie_mech_injury_down_by_footstep_loop
+}
+zm_robot_hit_out : notify jump_anim
+{
+	ai_zombie_mech_injury_recover_from_footstep
+}

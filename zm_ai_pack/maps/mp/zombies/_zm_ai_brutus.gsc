@@ -535,6 +535,7 @@ brutus_temp_despawn( brutus, endon_notify, respawn_notify )
 	helmet_hits = brutus.helmet_hits;
 	explosive_dmg_taken = brutus.explosive_dmg_taken;
 	zone_name = brutus.force_zone;
+	brutus notify("death");
 	brutus delete();
 	level.brutus_count--;
 	level waittill( respawn_notify );
@@ -799,6 +800,9 @@ brutus_death()
 		self thread brutus_cleanup_at_end_of_grief_round();
 
 	self waittill( "death" );
+	print("^2brutus_death death notified");
+	if ( isdefined( self.robot_stomped ) && self.robot_stomped )
+		death_origin = death_origin + vectorscale( ( 0, 0, 1 ), 90.0 );
 	self thread sndbrutusvox( "vox_brutus_brutus_defeated" );
 	level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent( "brutus_death" );
 	level.brutus_count--;
@@ -1032,11 +1036,14 @@ attempt_brutus_spawn( n_spawn_num )
 
 brutus_start_basic_find_flesh()
 {
+	self notify("brutus_start_basic_find_flesh");
+	self endon("brutus_start_basic_find_flesh");
 	self.goalradius = 48;
 	self.custom_goalradius_override = level.brutus_custom_goalradius;
 
-	if ( self.ai_state != "find_flesh" )
+	if ( isdefined(self) && self.ai_state != "find_flesh" )
 	{
+		self notify( "stop_find_flesh" );
 		self.ai_state = "find_flesh";
 		self thread maps\mp\zombies\_zm_ai_basic::find_flesh();
 	}
@@ -1055,7 +1062,7 @@ setup_devgui()
 {
 	/#
 	setdvar( "spawn_Brutus", "off" );
-	adddebugcommand( "devgui_cmd \"Zombies:2/Zombie Spawning:2/Spawn Zombie:1/Brutus:1\" \"spawn_Brutus on\"\n" );
+	//adddebugcommand( "devgui_cmd \"Zombies:2/Zombie Spawning:2/Spawn Zombie:1/Brutus:1\" \"spawn_Brutus on\"\n" );
 	level thread watch_devgui_brutus();
 #/
 }
@@ -1166,15 +1173,24 @@ brutus_stuck_teleport()
 	align_struct.angles = self.angles;
 	align_struct setmodel( "tag_origin" );
 
-	if ( !level.brutus_in_grief && ( isdefined(level.e_gondola.t_ride) && self sys::istouching( level.e_gondola.t_ride ) || isdefined( self.force_gondola_teleport ) && self.force_gondola_teleport ) )
+	if ( (!isdefined(level.brutus_in_grief) || !level.brutus_in_grief) && ( isdefined(level.e_gondola) && isdefined(level.e_gondola.t_ride)  && self sys::istouching( level.e_gondola.t_ride ) || isdefined( self.force_gondola_teleport ) && self.force_gondola_teleport ) )
 	{
 		self.force_gondola_teleport = 0;
-		align_struct sys::linkto( level.e_gondola );
+		if(isdefined(level.e_gondola))
+		{
+			align_struct sys::linkto( level.e_gondola );
+		}
 		self sys::linkto( align_struct );
 	}
 
 	self.not_interruptable = 1;
-	playfxontag( level._effect["brutus_spawn"], align_struct, "tag_origin" );
+	if(isdefined(level._effect["brutus_spawn"]))
+	{
+		playfxontag( level._effect["brutus_spawn"], align_struct, "tag_origin" );
+	}
+	assert(isdefined(level._effect["brutus_spawn"]), "^level._effect[brutus_spawn] not defined");
+	assert(isdefined(self.origin), "^2self.origin not defined");
+	assert(isdefined(self.angles), "^2self.angles not defined");
 	self sys::animscripted( self.origin, self.angles, "zm_taunt" );
 	self maps\mp\animscripts\zm_shared::donotetracks( "taunt_anim" );
 	self.not_interruptable = 0;
@@ -1194,9 +1210,15 @@ brutus_stuck_teleport()
 	if ( isdefined( level.brutus_respawn_after_despawn ) && level.brutus_respawn_after_despawn )
 	{
 		b_no_current_valid_targets = are_all_targets_invalid();
+		// assert(isdefined(self.health), "^2self.health not defined");
+		// assert(isdefined(self.has_helmet), "^2self.has_helmet not defined");
+		// assert(isdefined(self.helmet_hits), "^2self.helmet_hits not defined");
+		// assert(isdefined(self.explosive_dmg_taken), "^2self.explosive_dmg_taken not defined");
+		// assert(isdefined(self.force_zone), "^2self.force_zone not defined");
+		// assert(isdefined(self.b_no_current_valid_targets), "^2self.b_no_current_valid_targets not defined");
 		level thread respawn_brutus( self.health, self.has_helmet, self.helmet_hits, self.explosive_dmg_taken, self.force_zone, b_no_current_valid_targets );
 	}
-
+	assert(isdefined(level.brutus_count), "^2self.brutus_count not defined");
 	level.brutus_count--;
 	self delete();
 }
@@ -2963,4 +2985,45 @@ transfer_plane_trigger( from, to )
 		t_plane_fly = sys::getent( "plane_fly_trigger", "targetname" );
 		t_plane_fly sethintstring( &"ZM_PRISON_PLANE_BOARD" );
 	}
+}
+
+brutus_stomp_callback()
+{
+	self endon( "death" );
+
+	if ( isdefined( self.robot_stomped ) && self.robot_stomped )
+		return;
+
+	self.not_interruptable = 1;
+	self.robot_stomped = 1;
+	//self mechz_interrupt();
+	/#
+	if ( getdvarint( #"_id_E7121222" ) > 1 )
+		println( "\\nMZ: brutus stomp setting not interruptable\\n" );
+#/
+	//self thread mechz_stomped_by_giant_robot_vo();
+	v_trace_start = self.origin + vectorscale( ( 0, 0, 1 ), 100.0 );
+	v_trace_end = self.origin - vectorscale( ( 0, 0, 1 ), 500.0 );
+	v_trace = physicstrace( self.origin, v_trace_end, ( -15, -15, -5 ), ( 15, 15, 5 ), self );
+	self.origin = v_trace["position"];
+	timer = 0;
+	self sys::animscripted( self.origin, self.angles, "zm_robot_hit_in" );
+	self maps\mp\animscripts\zm_shared::donotetracks( "pain_anim" );
+	anim_length = self getanimlengthfromasd( "zm_robot_hit_loop", 0 );
+
+	while ( timer < level.mechz_robot_knockdown_time )
+	{
+		timer = timer + anim_length;
+		self sys::animscripted( self.origin, self.angles, "zm_robot_hit_loop" );
+		self maps\mp\animscripts\zm_shared::donotetracks( "pain_anim" );
+	}
+
+	self sys::animscripted( self.origin, self.angles, "zm_robot_hit_out" );
+	self maps\mp\animscripts\zm_shared::donotetracks( "jump_anim" );
+	/#
+	if ( getdvarint( #"_id_E7121222" ) > 1 )
+		println( "\\nMZ: Robot stomp clearing not interruptable\\n" );
+#/
+	self.not_interruptable = 0;
+	self.robot_stomped = 0;
 }

@@ -24,8 +24,8 @@ init()
 
 	level thread command_thread();
 	level thread on_player_connect();
-	level thread draw_zombie_spawn_locations();
-	level thread draw_nodes();
+	//level thread draw_zombie_spawn_locations();
+	//level thread draw_nodes();
 }
 
 command_thread()
@@ -35,7 +35,7 @@ command_thread()
 		level waittill( "say", message, player, is_hidden );
 		if(GetDvarInt("zm_ai_pack_debug") <= 0)
 		{
-			wait 0.001;
+			wait 1;
 			continue;
 		}
 		args = strTok( message, " " );

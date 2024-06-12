@@ -53,5 +53,104 @@ body
 
 	// Summon Dogs
 	ai_zombie_cellbreaker_summondogs
+
+	// one inch punch anims
+	ai_zombie_thundergun_hit
+	
+	ai_zombie_thundergun_hit_armslegsforward
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_forwardtoface
+	
+	ai_zombie_thundergun_hit_upontoback
+	ai_zombie_thundergun_hit_stumblefall
+	ai_zombie_thundergun_hit_deadfallknee
+	ai_zombie_thundergun_hit_flatonback
+
+	ai_zombie_thundergun_hit_legsout_right
+	ai_zombie_thundergun_hit_legsout_left
+	
+	ai_zombie_thundergun_hit_jackiespin_left
+	ai_zombie_thundergun_hit_jackiespin_right
+	
+	ai_zombie_thundergun_hit_faceplant
+	
+	ai_zombie_thundergun_getup
+	
+	ai_zombie_thundergun_getup_a
+	ai_zombie_thundergun_getup_b
+	ai_zombie_thundergun_getup_c
+	
+	ai_zombie_thundergun_getup_quick_a	
+	ai_zombie_thundergun_getup_quick_b
+	ai_zombie_thundergun_getup_quick_c
+	
+	ai_zombie_thundergun_sprinter_getup_a
+	ai_zombie_thundergun_sprinter_getup_b
+	ai_zombie_thundergun_sprinter_getup_c
+	
+	//electrocuted death anims
+	ai_zombie_dlc4_tesla_death_a
+	ai_zombie_dlc4_tesla_death_b
+	ai_zombie_dlc4_tesla_death_c
+	ai_zombie_dlc4_tesla_death_d
+	ai_zombie_dlc4_tesla_death_e
+	
+	ai_zombie_dlc4_tesla_crawl_death_a
+	ai_zombie_dlc4_tesla_crawl_death_b
+	
+	//freeze death anims
+	ai_zombie_dlc4_freeze_death_a
+	ai_zombie_dlc4_freeze_death_b
+	ai_zombie_dlc4_freeze_death_c
+	ai_zombie_dlc4_freeze_death_d
+	ai_zombie_dlc4_freeze_death_e
+	
+	ai_zombie_death_icestaff_a
+	ai_zombie_death_icestaff_b
+	ai_zombie_death_icestaff_c
+	ai_zombie_death_icestaff_d
+	ai_zombie_death_icestaff_e
+	
+	ai_zombie_dlc4_crawl_freeze_death_01
+	ai_zombie_dlc4_crawl_freeze_death_02
+	
+	ai_zombie_afterlife_stun_a
+	ai_zombie_afterlife_stun_b
+	ai_zombie_afterlife_stun_c
+	ai_zombie_afterlife_stun_d
+	ai_zombie_afterlife_stun_e
+
+	// Whirlwind staff animations.
+	ai_zombie_airstaff_death_vacuumed_a
+	ai_zombie_airstaff_death_vacuumed_b
+	ai_zombie_airstaff_death_vacuumed_c
+	
+	ai_zombie_airstaff_death_vacuumed_midair_a
+	ai_zombie_airstaff_death_vacuumed_midair_b
+	ai_zombie_airstaff_death_vacuumed_midair_c
+	ai_zombie_airstaff_death_vacuumed_midair_d
+	
+	ai_zombie_firestaff_death_walking_a
+	ai_zombie_firestaff_death_walking_b
+	ai_zombie_firestaff_death_walking_c
+	
+	ai_zombie_firestaff_death_collapse_a
+	ai_zombie_firestaff_death_collapse_b
+	
+	// Zombie grabbed by MechZ
+	ai_zombie_grabbed_by_mech 
+
+		// Pain
+	ai_zombie_mech_pain
+	ai_zombie_mech_injury_hit_by_tank
+	ai_zombie_mech_injury_down_by_tank_loop
+	ai_zombie_mech_injury_recover_from_tank
+	ai_zombie_mech_injury_hit_by_footstep
+	ai_zombie_mech_injury_down_by_footstep_loop
+	ai_zombie_mech_injury_recover_from_footstep
+	ai_zombie_mech_stunned
+	ai_zombie_mech_powercore_pain
+	ai_zombie_mech_faceplate_pain
+	ai_zombie_mech_head_pain
 	
 } // end body
