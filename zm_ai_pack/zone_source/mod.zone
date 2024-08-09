@@ -6,6 +6,19 @@
 >level.ipak_read,dlczm2
 >level.ipak_read,dlczm3
 >level.ipak_read,dlczm4
+include,common_sp
+include,common_mp
+include,common_zm
+include,zm_transit
+include,zm_nuked
+include,zm_highrise
+include,zm_prison
+include,zm_buried
+include,zm_tomb
+include,zm_ports_motd
+include,zm_ports_buried
+include,zm_ports_music
+include,zm_ports_main
 
 include,zm_all_basic
 
@@ -113,5 +126,3 @@ script,maps/mp/zombies/_zm_perk_random.gsc
 script,scripts/zm/replacements.gsc
 script,scripts/zm/zm_buried/replacements.gsc
 script,scripts/zm/zm_tomb/replacements.gsc
-
-include,zm_ports
