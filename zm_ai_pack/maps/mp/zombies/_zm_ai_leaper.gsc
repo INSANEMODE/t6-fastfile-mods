@@ -85,8 +85,16 @@ leaper_spawner_init()
 {
 	level.leaper_spawners = sys::getentarray( "leaper_zombie_spawner", "script_noteworthy" );
 
-	if ( level.leaper_spawners.size == 0 )
+	if ( !isdefined(level.leaper_spawners) || level.leaper_spawners.size == 0 )
+	{
+		assertmsg("level.leaper_spawners.size == 0");
 		return;
+	}
+	else
+	{
+		print("^3leaper_spawners count: "+ level.leaper_spawners.size);
+	}
+		
 
 	for ( i = 0; i < level.leaper_spawners.size; i++ )
 	{

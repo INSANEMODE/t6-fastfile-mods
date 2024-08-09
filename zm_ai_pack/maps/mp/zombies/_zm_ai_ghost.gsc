@@ -102,7 +102,7 @@ main()
 	level thread init_animtree();
 	level thread ghost_vox_think();
 	init_time_bomb_ghost_rounds();
-/#
+	/#
 	level.force_no_ghost = 0;
 	level.ghost_devgui_toggle_no_ghost = ::devgui_toggle_no_ghost;
 	level.ghost_devgui_warp_to_mansion = ::devgui_warp_to_mansion;
@@ -164,7 +164,7 @@ init()
 
 	level thread ghost_vox_think();
 	init_time_bomb_ghost_rounds();
-/#
+	/#
 	level.force_no_ghost = 0;
 	level.ghost_devgui_toggle_no_ghost = ::devgui_toggle_no_ghost;
 	level.ghost_devgui_warp_to_mansion = ::devgui_warp_to_mansion;
@@ -176,8 +176,16 @@ init_ghost_spawners()
 {
 	level.ghost_spawners = sys::getentarray( "ghost_zombie_spawner", "script_noteworthy" );
 
-	if ( level.ghost_spawners.size == 0 )
+	if ( !isdefined(level.ghost_spawners) || level.ghost_spawners.size == 0 )
+	{
+		assertmsg("level.ghost_spawners.size == 0");
 		return false;
+	}
+	else
+	{
+		print("^3ghost_spawners count: "+ level.ghost_spawners.size);
+	}
+
 
 	array_thread( level.ghost_spawners, ::add_spawn_function, maps\mp\zombies\_zm_ai_ghost::prespawn );
 
@@ -309,7 +317,7 @@ ghost_zone_spawning_think()
 
 	if ( !isdefined( level.female_ghost_spawner ) )
 	{
-/#
+		/#
 		assertmsg( "No female ghost spawner in the map.  Check to see if the zone is active and if it's pointing to spawners." );
 #/
 		return;
@@ -355,7 +363,7 @@ ghost_zone_spawning_think()
 			continue;
 		}
 
-/#
+		/#
 		if ( isdefined( level.force_no_ghost ) && level.force_no_ghost )
 		{
 			wait 0.1;
@@ -368,7 +376,7 @@ ghost_zone_spawning_think()
 			ghost_ai = spawn_zombie( level.female_ghost_spawner, level.female_ghost_spawner.targetname, spawn_point );
 		else
 		{
-/#
+			/#
 			assertmsg( "No female ghost spawner in the map." );
 #/
 			return;
@@ -383,13 +391,13 @@ ghost_zone_spawning_think()
 			ghost_ai.is_spawned_in_ghost_zone = 1;
 			ghost_ai.find_target = 1;
 			level.zombie_ghost_count++;
-/#
+			/#
 			ghost_print( "ghost total " + level.zombie_ghost_count );
 #/
 		}
 		else
 		{
-/#
+			/#
 			assertmsg( "Female ghost: failed spawn" );
 #/
 			return;
@@ -452,7 +460,7 @@ player_in_ghost_zone_monitor()
 					if ( isdefined( player.current_ghost_room_name ) )
 					{
 						current_room = level.ghost_rooms[player.current_ghost_room_name];
-/#
+						/#
 						foreach ( ghost_location in current_room.ghost_spawn_locations )
 							draw_debug_star( ghost_location.origin, ( 0, 0, 1 ), 2 );
 
@@ -535,7 +543,7 @@ get_best_spawn_point( player )
 			if ( selected_locations.size > 0 )
 			{
 				selected_location = selected_locations[randomint( selected_locations.size )];
-/#
+				/#
 				draw_debug_line( player.origin, selected_location.origin, ( 0, 1, 0 ), 10, 0 );
 #/
 				return selected_location;
@@ -914,24 +922,24 @@ ghost_think()
 	{
 		switch ( self.state )
 		{
-			case "script_move_update":
-				self script_move_update();
-				break;
-			case "chase_update":
-				self chase_update();
-				break;
-			case "drain_update":
-				self drain_update();
-				break;
-			case "runaway_update":
-				self runaway_update();
-				break;
-			case "evaporate_update":
-				self evaporate_update();
-				break;
-			case "wait_update":
-				self wait_update();
-				break;
+		case "script_move_update":
+			self script_move_update();
+			break;
+		case "chase_update":
+			self chase_update();
+			break;
+		case "drain_update":
+			self drain_update();
+			break;
+		case "runaway_update":
+			self runaway_update();
+			break;
+		case "evaporate_update":
+			self evaporate_update();
+			break;
+		case "wait_update":
+			self wait_update();
+			break;
 		}
 
 		wait 0.1;
@@ -1676,7 +1684,7 @@ runaway_update()
 	else
 	{
 		self sys::setgoalpos( self.startinglocation );
-/#
+		/#
 		draw_debug_star( self.startinglocation, ( 0, 0, 1 ), 1 );
 		draw_debug_line( self.origin, self.startinglocation, ( 0, 1, 0 ), 1, 0 );
 #/
@@ -1706,7 +1714,7 @@ ghost_springpad_fling( weapon, attacker )
 
 ghost_print( str )
 {
-/#
+	/#
 	if ( getdvarint( #"_id_151B6F17" ) )
 	{
 		iprintln( "ghost: " + str + "\\n" );
@@ -1785,7 +1793,7 @@ ghost_round_start_conditions_met()
 
 can_start_ghost_round()
 {
-/#
+	/#
 	if ( isdefined( level.force_no_ghost ) && level.force_no_ghost )
 		return 0;
 #/
@@ -2171,7 +2179,7 @@ outside_ghost_zone_spawning_think()
 
 	if ( !isdefined( level.female_ghost_spawner ) )
 	{
-/#
+		/#
 		assertmsg( "No female ghost spawner in the map." );
 #/
 		return;
@@ -2196,7 +2204,7 @@ outside_ghost_zone_spawning_think()
 			}
 			else
 			{
-/#
+				/#
 				assertmsg( "female ghost outside ghost zone: failed spawn" );
 #/
 				return;
@@ -2353,7 +2361,7 @@ set_player_current_ghost_zone( player, ghost_zone_name )
 
 can_start_ghost_round_presentation()
 {
-/#
+	/#
 	if ( isdefined( level.force_no_ghost ) && level.force_no_ghost )
 		return false;
 #/
@@ -2441,7 +2449,7 @@ spawn_ghost_round_presentation_ghost()
 	}
 	else
 	{
-/#
+		/#
 		assertmsg( "ghost round presentation ghost: failed spawn" );
 #/
 		return;
@@ -2610,7 +2618,7 @@ init_time_bomb_ghost_rounds()
 	{
 		[[ level.time_bomb_register_time_bomb_enemy ]]( "ghost", ::is_ghost_round, ::save_ghost_data, ::time_bomb_respawns_ghosts );
 	}
-	
+
 	level.ghost_custom_think_logic = ::time_bomb_ghost_respawn_think;
 	if ( isDefined( level.time_bomb_time_bomb_add_custom_func_global_save ) )
 	{
@@ -2827,7 +2835,7 @@ _respawn_ghost_failsafe()
 
 devgui_warp_to_mansion()
 {
-/#
+	/#
 	player = gethostplayer();
 	player setorigin( ( 2324, 560, 148 ) );
 	player setplayerangles( ( 0, 0, 0 ) );
@@ -2836,14 +2844,14 @@ devgui_warp_to_mansion()
 
 devgui_toggle_no_ghost()
 {
-/#
+	/#
 	level.force_no_ghost = !level.force_no_ghost;
 #/
 }
 
 draw_debug_line( from, to, color, time, depth_test )
 {
-/#
+	/#
 	if ( isdefined( level.ghost_debug ) && level.ghost_debug )
 	{
 		if ( !isdefined( time ) )
@@ -2856,7 +2864,7 @@ draw_debug_line( from, to, color, time, depth_test )
 
 draw_debug_star( origin, color, time )
 {
-/#
+	/#
 	if ( isdefined( level.ghost_debug ) && level.ghost_debug )
 	{
 		if ( !isdefined( time ) )
@@ -2872,7 +2880,7 @@ draw_debug_star( origin, color, time )
 
 draw_debug_box( origin, mins, maxs, yaw, color, time )
 {
-/#
+	/#
 	if ( isdefined( level.ghost_debug ) && level.ghost_debug )
 	{
 		if ( !isdefined( time ) )

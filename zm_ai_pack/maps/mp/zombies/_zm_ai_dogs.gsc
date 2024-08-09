@@ -66,7 +66,7 @@ dog_spawner_init()
 		print("^2 level.dog_spawners defined");
 	}
 	later_dogs = sys::getentarray( "later_round_dog_spawners", "script_noteworthy" );
-		if(isdefined(later_dogs))
+	if(isdefined(later_dogs))
 	{
 		print("^2 later_dogs defined");
 	}
@@ -80,6 +80,10 @@ dog_spawner_init()
 	else if(!isdefined(level.dog_spawners) )
 	{
 		print("^1 level.dog_spawners not defined");
+	}
+	else
+	{
+		print("^3dog_spawners count: "+ level.dog_spawners.size);
 	}
 
 
@@ -279,7 +283,7 @@ dog_init()
 	{
 		self.maxhealth = int( level.dog_health * health_multiplier );
 	}
-	
+
 	self.health = self.maxhealth;
 	self.freezegun_damage = 0;
 	self.zombie_move_speed = "sprint";
@@ -306,7 +310,7 @@ dog_init()
 	{
 		self.meleedamage = 40;
 	}
-	
+
 	self.thundergun_knockdown_func = ::dog_thundergun_knockdown;
 	self maps\mp\zombies\_zm_spawner::zombie_history( "zombie_dog_spawn_init -> Spawned = " + self.origin );
 

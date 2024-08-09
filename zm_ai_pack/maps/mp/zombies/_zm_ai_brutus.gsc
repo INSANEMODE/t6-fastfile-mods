@@ -83,8 +83,12 @@ main()
 
 	level.brutus_spawners = sys::getentarray( "brutus_zombie_spawner", "script_noteworthy" );
 
-	if ( level.brutus_spawners.size == 0 )
+	if ( !isdefined(level.brutus_spawners) || level.brutus_spawners.size == 0 )
+	{
+		assertmsg("level.brutus_spawners.size == 0");
 		return;
+	}
+	
 
 	array_thread( level.brutus_spawners, ::add_spawn_function, ::brutus_prespawn );
 
@@ -163,8 +167,15 @@ init()
 {
 	level.brutus_spawners = sys::getentarray( "brutus_zombie_spawner", "script_noteworthy" );
 
-	if ( level.brutus_spawners.size == 0 )
+	if ( !isdefined(level.brutus_spawners) || level.brutus_spawners.size == 0 )
+	{
+		assertmsg("level.brutus_spawners.size == 0");
 		return;
+	}
+	else
+	{
+		print("^3brutus_spawners count: "+ level.brutus_spawners.size);
+	}
 
 	array_thread( level.brutus_spawners, ::add_spawn_function, ::brutus_prespawn );
 
