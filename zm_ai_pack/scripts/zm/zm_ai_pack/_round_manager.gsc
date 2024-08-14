@@ -8,6 +8,7 @@
 
 main()
 {
+	//rm_min_rounds_before_special_round 1 ; rm_max_rounds_before_special_round 1; rm_special_round_chance 100; set zm_ai_pack_debug 1; developer 2; developer_script 1
 	set_dvar_if_unset( "rm_min_rounds_before_special_round", 4 );
 	set_dvar_if_unset( "rm_max_rounds_before_special_round", 6 );
 	set_dvar_if_unset( "rm_special_round_chance", 33 );
@@ -58,58 +59,58 @@ main()
 	//scripts\zm\zm_ai_pack\rounds\_ghost::main();
 
 	register_special_round( "zombie_dog", "default",
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_spawning,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_wait,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_max,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_start,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_over,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_chance,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_next );
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_spawning,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_wait,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_max,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_start,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_over,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_chance,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_next );
 
 	register_special_round( "zombie_dog", "rush",
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_spawning_rush,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_wait,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_max_rush,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_start,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_over,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_chance_rush,
-										  scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_next_rush );
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_spawning_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_wait,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_max_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_start,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_over,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_chance_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_zombie_dog::round_next_rush );
 
 	register_special_round( "mechz", "default",
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_spawning,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_wait,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_max,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_start,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_over,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_chance,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_next );
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_spawning,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_wait,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_max,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_start,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_over,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_chance,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_next );
 
 	register_special_round( "mechz", "rush",
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_spawning_rush,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_wait,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_max_rush,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_start,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_over,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_chance_rush,
-										  scripts\zm\zm_ai_pack\rounds\_mechz::round_next_rush );
-										  
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_spawning_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_wait,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_max_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_start,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_over,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_chance_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_mechz::round_next_rush );
+
 	register_special_round( "brutus", "default",
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_spawning,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_wait,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_max,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_start,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_over,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_chance,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_next );
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_spawning,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_wait,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_max,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_start,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_over,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_chance,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_next );
 
 	register_special_round( "brutus", "rush",
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_spawning_rush,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_wait,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_max_rush,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_start,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_over,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_chance_rush,
-										  scripts\zm\zm_ai_pack\rounds\_brutus::round_next_rush );
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_spawning_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_wait,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_max_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_start,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_over,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_chance_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_brutus::round_next_rush );
 
 	// register_special_round( "ghost", "default",
 	// 									  scripts\zm\zm_ai_pack\rounds\_ghost::round_spawning,
@@ -130,90 +131,90 @@ main()
 	// 									  scripts\zm\zm_ai_pack\rounds\_ghost::round_next_rush );
 
 	register_special_round( "leaper", "default",
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_spawning,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_wait,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_max,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_start,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_over,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_chance,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_next );
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_spawning,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_wait,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_max,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_start,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_over,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_chance,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_next );
 
 	register_special_round( "leaper", "rush",
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_spawning_rush,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_wait,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_max_rush,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_start,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_over,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_chance_rush,
-										  scripts\zm\zm_ai_pack\rounds\_leaper::round_next_rush );
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_spawning_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_wait,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_max_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_start,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_over,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_chance_rush,
+	                        scripts\zm\zm_ai_pack\rounds\_leaper::round_next_rush );
 
 	register_special_round( "normal", "default",
-										  scripts\zm\zm_ai_pack\rounds\_normal::round_spawning,
-										  scripts\zm\zm_ai_pack\rounds\_normal::round_wait,
-										  scripts\zm\zm_ai_pack\rounds\_normal::round_max,
-										  scripts\zm\zm_ai_pack\rounds\_normal::round_start,
-										  scripts\zm\zm_ai_pack\rounds\_normal::round_over,
-										  scripts\zm\zm_ai_pack\rounds\_normal::round_chance,
-										  scripts\zm\zm_ai_pack\rounds\_normal::round_next );
+	                        scripts\zm\zm_ai_pack\rounds\_normal::round_spawning,
+	                        scripts\zm\zm_ai_pack\rounds\_normal::round_wait,
+	                        scripts\zm\zm_ai_pack\rounds\_normal::round_max,
+	                        scripts\zm\zm_ai_pack\rounds\_normal::round_start,
+	                        scripts\zm\zm_ai_pack\rounds\_normal::round_over,
+	                        scripts\zm\zm_ai_pack\rounds\_normal::round_chance,
+	                        scripts\zm\zm_ai_pack\rounds\_normal::round_next );
 
 	register_special_round( "mixed", "default",
-										  scripts\zm\zm_ai_pack\rounds\_mixed::round_spawning,
-										  scripts\zm\zm_ai_pack\rounds\_mixed::round_wait,
-										  scripts\zm\zm_ai_pack\rounds\_mixed::round_max,
-										  scripts\zm\zm_ai_pack\rounds\_mixed::round_start,
-										  scripts\zm\zm_ai_pack\rounds\_mixed::round_over,
-										  scripts\zm\zm_ai_pack\rounds\_mixed::round_chance,
-										  scripts\zm\zm_ai_pack\rounds\_mixed::round_next );
+	                        scripts\zm\zm_ai_pack\rounds\_mixed::round_spawning,
+	                        scripts\zm\zm_ai_pack\rounds\_mixed::round_wait,
+	                        scripts\zm\zm_ai_pack\rounds\_mixed::round_max,
+	                        scripts\zm\zm_ai_pack\rounds\_mixed::round_start,
+	                        scripts\zm\zm_ai_pack\rounds\_mixed::round_over,
+	                        scripts\zm\zm_ai_pack\rounds\_mixed::round_chance,
+	                        scripts\zm\zm_ai_pack\rounds\_mixed::round_next );
 
-	register_mixed_round_preset( "default", 
-										  scripts\zm\zm_ai_pack\mixed_presets\_default::preset_chance,
-										  scripts\zm\zm_ai_pack\mixed_presets\_default::round_start );
+	register_mixed_round_preset( "default",
+	                             scripts\zm\zm_ai_pack\mixed_presets\_default::preset_chance,
+	                             scripts\zm\zm_ai_pack\mixed_presets\_default::round_start );
 
 	register_mixed_round_preset_variant( "default", "random",
-										  scripts\zm\zm_ai_pack\mixed_variants\_random::spawning_random,
-										  scripts\zm\zm_ai_pack\mixed_variants\_random::spawning_chance,
-										  scripts\zm\zm_ai_pack\mixed_variants\_random::spawning_limit,
-										  scripts\zm\zm_ai_pack\mixed_variants\_random::spawning_cooldown,
-										  scripts\zm\zm_ai_pack\mixed_variants\_random::spawning_round_start );
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_random::spawning_random,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_random::spawning_chance,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_random::spawning_limit,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_random::spawning_cooldown,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_random::spawning_round_start );
 
-	register_mixed_round_preset( "wave", 
-										  scripts\zm\zm_ai_pack\mixed_presets\_default::preset_chance,
-										  scripts\zm\zm_ai_pack\mixed_presets\_default::round_start );
+	register_mixed_round_preset( "wave",
+	                             scripts\zm\zm_ai_pack\mixed_presets\_default::preset_chance,
+	                             scripts\zm\zm_ai_pack\mixed_presets\_default::round_start );
 
 	register_mixed_round_preset_variant( "wave", "normal_wave",
-										  scripts\zm\zm_ai_pack\mixed_variants\_normal_wave::spawning_wave,
-										  scripts\zm\zm_ai_pack\mixed_variants\_normal_wave::spawning_chance,
-										  scripts\zm\zm_ai_pack\mixed_variants\_normal_wave::spawning_limit,
-										  scripts\zm\zm_ai_pack\mixed_variants\_normal_wave::spawning_cooldown,
-										  scripts\zm\zm_ai_pack\mixed_variants\_normal_wave::spawning_round_start );
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_normal_wave::spawning_wave,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_normal_wave::spawning_chance,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_normal_wave::spawning_limit,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_normal_wave::spawning_cooldown,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_normal_wave::spawning_round_start );
 
 	register_mixed_round_preset_variant( "wave", "dog_wave",
-										  scripts\zm\zm_ai_pack\mixed_variants\_dog_wave::spawning_wave,
-										  scripts\zm\zm_ai_pack\mixed_variants\_dog_wave::spawning_chance,
-										  scripts\zm\zm_ai_pack\mixed_variants\_dog_wave::spawning_limit,
-										  scripts\zm\zm_ai_pack\mixed_variants\_dog_wave::spawning_cooldown,
-										  scripts\zm\zm_ai_pack\mixed_variants\_dog_wave::spawning_round_start);
-	
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_dog_wave::spawning_wave,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_dog_wave::spawning_chance,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_dog_wave::spawning_limit,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_dog_wave::spawning_cooldown,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_dog_wave::spawning_round_start);
+
 	register_mixed_round_preset_variant( "wave", "mechz_wave",
-										  scripts\zm\zm_ai_pack\mixed_variants\_mechz_wave::spawning_wave,
-										  scripts\zm\zm_ai_pack\mixed_variants\_mechz_wave::spawning_chance,
-										  scripts\zm\zm_ai_pack\mixed_variants\_mechz_wave::spawning_limit,
-										  scripts\zm\zm_ai_pack\mixed_variants\_mechz_wave::spawning_cooldown,
-										  scripts\zm\zm_ai_pack\mixed_variants\_mechz_wave::spawning_round_start);
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_mechz_wave::spawning_wave,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_mechz_wave::spawning_chance,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_mechz_wave::spawning_limit,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_mechz_wave::spawning_cooldown,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_mechz_wave::spawning_round_start);
 
 	register_mixed_round_preset_variant( "wave", "brutus_wave",
-										  scripts\zm\zm_ai_pack\mixed_variants\_brutus_wave::spawning_wave,
-										  scripts\zm\zm_ai_pack\mixed_variants\_brutus_wave::spawning_chance,
-										  scripts\zm\zm_ai_pack\mixed_variants\_brutus_wave::spawning_limit,
-										  scripts\zm\zm_ai_pack\mixed_variants\_brutus_wave::spawning_cooldown,
-										  scripts\zm\zm_ai_pack\mixed_variants\_brutus_wave::spawning_round_start);
-	
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_brutus_wave::spawning_wave,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_brutus_wave::spawning_chance,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_brutus_wave::spawning_limit,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_brutus_wave::spawning_cooldown,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_brutus_wave::spawning_round_start);
+
 	register_mixed_round_preset_variant( "wave", "leaper_wave",
-										  scripts\zm\zm_ai_pack\mixed_variants\_leaper_wave::spawning_wave,
-										  scripts\zm\zm_ai_pack\mixed_variants\_leaper_wave::spawning_chance,
-										  scripts\zm\zm_ai_pack\mixed_variants\_leaper_wave::spawning_limit,
-										  scripts\zm\zm_ai_pack\mixed_variants\_leaper_wave::spawning_cooldown,
-										  scripts\zm\zm_ai_pack\mixed_variants\_leaper_wave::spawning_round_start);
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_leaper_wave::spawning_wave,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_leaper_wave::spawning_chance,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_leaper_wave::spawning_limit,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_leaper_wave::spawning_cooldown,
+	                                     scripts\zm\zm_ai_pack\mixed_variants\_leaper_wave::spawning_round_start);
 
 	// register_mixed_round_preset_variant( "wave", "ghost_wave",
 	// 									  scripts\zm\zm_ai_pack\mixed_variants\_ghost_wave::spawning_wave,
@@ -256,7 +257,133 @@ main()
 	// Add faster sprinters as an enemy type
 	// ghosts phase through walls
 }
+remove_special_round(removed_type)
+{
+	wait 2;
+	print("^1remove_special_round: removing: " + removed_type);
+	final_string ="";
+	special_round_string = getDvar( "rm_allowed_special_rounds" );
 
+	if ( special_round_string == "" || special_round_string == "normal" )
+	{
+		print("^1remove_special_round: special_round_string empty or normal");
+		return false;
+	}
+	else if ( isdefined(special_round_string))
+	{
+		print("^1remove_special_wave: special_round_string undefined");
+		return false;
+	}
+	else
+	{
+		print("^1remove_special_round:special_round_string: "+ special_round_string);
+	}
+	special_round_types = strTok( special_round_string, " " );
+	if(!IsInArray(special_round_types, removed_type))
+	{
+		print(removed_type+ "is not in rm_allowed_special_rounds");
+		return;
+	}
+	if(isdefined(special_round_types) )
+	{
+		foreach(type in special_round_types)
+		{
+			if(type != removed_type)
+			{
+				final_string += " " + type;
+			}
+		}
+		print("setting special waves to: "+ final_string);
+		setDvar("rm_allowed_special_rounds", final_string);
+	}
+	else
+	{
+		print("remove_special_round: special_wave_round not defined");
+	}
+
+
+}
+remove_special_wave(removed_type)
+{
+	wait 2;
+	print("remove_special_wave: removing: " + removed_type);
+	final_string ="";
+	special_wave_string = getDvar( "rm_allowed_mixed_round_variants_for_wave_preset" );
+
+	if ( special_wave_string == "" || special_wave_string == "normal_wave" )
+	{
+		print("^1remove_special_wave: special_wave_string empty or normal_wave");
+		return false;
+	}
+	else if ( isdefined(special_wave_string))
+	{
+		print("^1remove_special_wave: special_wave_string undefined");
+		return false;
+	}
+	else
+	{
+		print("^remove_special_wave:special_wave_string: "+ special_wave_string);
+	}
+	special_wave_types = strTok( special_wave_string, " " );
+	if(!IsInArray(special_wave_types, removed_type))
+	{
+		print(removed_type+ "is not in rm_allowed_mixed_round_variants_for_wave_preset");
+		return;
+	}
+	if(isdefined(special_wave_types) )
+	{
+		foreach(type in special_wave_types)
+		{
+			if(type != removed_type)
+			{
+				final_string += " " + type;
+			}
+		}
+		print("setting special waves to: "+ final_string);
+		setDvar("rm_allowed_mixed_round_variants_for_wave_preset", final_string);
+	}
+	else
+	{
+		print("remove_special_wave: special_wave_types not defined");
+	}
+}
+spawner_check(enemy)
+{
+	switch (enemy) {
+	case "ghost":
+		if ( !isdefined(level.ghost_spawners) || level.ghost_spawners.size == 0 )
+		{
+			return 0;
+		}
+		break;
+	case "leaper":
+		if ( !isdefined(level.leaper_spawners) || level.leaper_spawners.size == 0 )
+		{
+			return 0;
+		}
+		break;
+	case "brutus":
+		if ( !isdefined(level.brutus_spawners) || level.brutus_spawners.size == 0 )
+		{
+			return 0;
+		}
+		break;
+	case "mechz":
+		if ( !isdefined(level.mechz_spawners) || level.mechz_spawners.size == 0 )
+		{
+			return 0;
+		}
+		break;
+	case "zombie_dog":
+		if ( !isdefined(level.dog_spawners) || level.dog_spawners.size == 0 )
+		{
+			return 0;
+		}
+		break;
+	}
+	return 1;
+
+}
 should_do_special_round()
 {
 	forced_special_round_string = getDvar( "rm_forced_special_round" );
@@ -385,7 +512,7 @@ determine_current_round_type()
 		possible_variants_keys = [];
 		possible_variants_keys[ 0 ] = "default";
 	}
-	
+
 	max_iterations = 50;
 	current_iterations = 0;
 
@@ -420,12 +547,29 @@ determine_current_round_type()
 			break;
 		}
 	}
+	excluded_round_types = [];
+	foreach(key in possible_round_types_keys)
+	{
+		if(!spawner_check(key))
+		{
+			excluded_round_types = add_to_array( excluded_round_types, key, 0 );
+		}
+	}
+	printArray("possible_round_types_keys: ", possible_round_types_keys);
+	printArray("excluded_round_types:", excluded_round_types);
+
+	possible_round_types_keys = array_exclude(possible_round_types_keys, excluded_round_types);
+	printArray("possible_round_types_keys after: ", possible_round_types_keys);
 	for (;;)
 	{
 		possible_round_types = array_randomize( possible_round_types_keys );
 		for ( i = 0; i < possible_round_types.size; i++ )
 		{
 			if ( possible_round_types[ i ] == "normal" )
+			{
+				continue;
+			}
+			else if ( !spawner_check(possible_round_types[ i ]) )
 			{
 				continue;
 			}
@@ -447,7 +591,7 @@ determine_current_round_type()
 			for ( j = 0; j < possible_variants.size; j++ )
 			{
 				if ( possible_round_types.size <= 1 || ( [[ level.round_manager_special_rounds[ possible_round_types[ i ] ][ possible_variants[ j ] ].next_instance_func ]]() <= level.round_number || !normal_present )
-				&& [[ level.round_manager_special_rounds[ possible_round_types[ i ] ][ possible_variants[ j ] ].chance_func ]]() )
+				        && [[ level.round_manager_special_rounds[ possible_round_types[ i ] ][ possible_variants[ j ] ].chance_func ]]() )
 				{
 					return_value.round_type = possible_round_types[ i ];
 					return_value.variant = possible_variants[ j ];
@@ -475,7 +619,7 @@ round_think_override( restart )
 	if ( !isdefined( restart ) )
 		restart = 0;
 
-/#
+	/#
 	println( "ZM >> round_think start" );
 #/
 	level endon( "end_round_think" );
@@ -494,7 +638,7 @@ round_think_override( restart )
 				if ( !( isdefined( player.hostmigrationcontrolsfrozen ) && player.hostmigrationcontrolsfrozen ) )
 				{
 					player freezecontrols( 0 );
-/#
+					/#
 					println( " Unfreeze controls 8" );
 #/
 				}
@@ -539,14 +683,14 @@ round_think_override( restart )
 			level thread award_grenades_for_survivors();
 
 		bbprint( "zombie_rounds", "round %d player_count %d", level.round_number, players.size );
-/#
+		/#
 		println( "ZM >> round_think, round=" + level.round_number + ", player_count=" + players.size );
 #/
 		level.round_start_time = gettime();
 
 		while ( level.zombie_spawn_locations.size <= 0 )
 			wait 0.1;
-/#
+		/#
 		while ( getdvarint( #"zombie_cheat" ) == 2 || getdvarint( #"zombie_cheat" ) >= 4 )
 			wait 1;
 #/
@@ -556,7 +700,7 @@ round_think_override( restart )
 		maps\mp\zombies\_zm_ai_brutus::brutus_health_increases();
 		maps\mp\zombies\_zm_ai_leaper::leaper_health_increase();
 		//maps\mp\zombies\_zm_ai_ghost::increase_ghost_health();
-		
+
 
 		if ( current_round_data.round_type != "mixed" )
 		{
@@ -752,4 +896,17 @@ pick_mixed_round_preset_variant( variants )
 			return variants[ possible_variants[ 0 ] ];
 		}
 	}
+}
+
+printArray(msg, array)
+{
+	print(msg);
+	print("^3------");
+	foreach(key in array)
+	{
+		print(key);
+	}
+
+
+	print("^3------");
 }

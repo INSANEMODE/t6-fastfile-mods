@@ -87,7 +87,10 @@ leaper_spawner_init()
 
 	if ( !isdefined(level.leaper_spawners) || level.leaper_spawners.size == 0 )
 	{
-		assertmsg("^1level.leaper_spawners.size == 0 or undefined");
+		print("^1level.leaper_spawners.size == 0 or undefined, removing from array");
+		//thread scripts\zm\zm_ai_pack\_round_manager::remove_special_round("leaper");
+		//thread scripts\zm\zm_ai_pack\_round_manager::remove_special_wave("leaper_wave");
+
 		return;
 	}
 	else
