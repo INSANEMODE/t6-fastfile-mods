@@ -123,6 +123,6 @@ script,scripts/zm/zm_transit/zm_ai_pack_mod_zm_transit_main.gsc
 script,clientscripts/mp/zombies/_zm.csc
 script,clientscripts/mp/zombies/_zm_perk_random.csc
 script,maps/mp/zombies/_zm_perk_random.gsc
-script,scripts/zm/replacements.gsc
+//script,scripts/zm/replacements.gsc
 script,scripts/zm/zm_buried/replacements.gsc
 script,scripts/zm/zm_tomb/replacements.gsc

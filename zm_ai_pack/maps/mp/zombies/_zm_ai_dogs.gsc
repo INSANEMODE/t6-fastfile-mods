@@ -98,8 +98,8 @@ dog_spawner_init()
 		level.dog_spawners[i].is_enabled = 1;
 		level.dog_spawners[i].script_forcespawn = 1;
 	}
-
-	assert( level.dog_spawners.size > 0 );
+	assert(level.dog_spawners.size > 0 );
+	assert(isdefined(level.dog_spawners) );
 	level.dog_health = 100;
 	array_thread( level.dog_spawners, ::add_spawn_function, ::dog_init );
 	level.enemy_dog_spawns = sys::getentarray( "zombie_spawner_dog_init", "targetname" );

@@ -89,7 +89,8 @@ main()
 		return;
 	}
 	
-
+	assert(level.brutus_spawners.size > 0 );
+	assert(isdefined(level.brutus_spawners) );
 	array_thread( level.brutus_spawners, ::add_spawn_function, ::brutus_prespawn );
 
 	for ( i = 0; i < level.brutus_spawners.size; i++ )
@@ -169,7 +170,7 @@ init()
 
 	if ( !isdefined(level.brutus_spawners) || level.brutus_spawners.size == 0 )
 	{
-		assertmsg("level.brutus_spawners.size == 0");
+		assertmsg("level.brutus_spawners.size == 0 or undefined");
 		return;
 	}
 	else
@@ -177,6 +178,8 @@ init()
 		print("^3brutus_spawners count: "+ level.brutus_spawners.size);
 	}
 
+	assert(level.brutus_spawners.size > 0 );
+	assert(isdefined(level.brutus_spawners) );
 	array_thread( level.brutus_spawners, ::add_spawn_function, ::brutus_prespawn );
 
 	for ( i = 0; i < level.brutus_spawners.size; i++ )

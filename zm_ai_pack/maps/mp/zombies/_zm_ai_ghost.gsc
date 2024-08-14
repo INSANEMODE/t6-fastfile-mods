@@ -186,7 +186,8 @@ init_ghost_spawners()
 		print("^3ghost_spawners count: "+ level.ghost_spawners.size);
 	}
 
-
+	assert(level.ghost_spawners.size > 0 );
+	assert(isdefined(level.ghost_spawners) );
 	array_thread( level.ghost_spawners, ::add_spawn_function, maps\mp\zombies\_zm_ai_ghost::prespawn );
 
 	foreach ( spawner in level.ghost_spawners )

@@ -100,7 +100,7 @@ init()
 	assert(isdefined(level.mechz_spawners) );
 	if ( !isdefined(level.mechz_spawners) ||level.mechz_spawners.size == 0 )
 	{
-		assertmsg("level.mechz_spawners.size == 0");
+		assertmsg("level.mechz_spawners.size == 0 or undefined");
 		return;
 
 	}
@@ -175,6 +175,8 @@ init()
 		//registerclientfield( "toplayer", "mechz_grab", 14000, 1, "int" );
 	}
 
+	assert(level.mechz_spawners.size > 0 );
+	assert(isdefined(level.mechz_spawners) );
 	level thread init_flamethrower_triggers();
 	if ( isdefined( level.mechz_spawning_logic_override_func ) )
 		level thread [[ level.mechz_spawning_logic_override_func ]]();

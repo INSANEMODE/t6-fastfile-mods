@@ -87,7 +87,7 @@ leaper_spawner_init()
 
 	if ( !isdefined(level.leaper_spawners) || level.leaper_spawners.size == 0 )
 	{
-		assertmsg("level.leaper_spawners.size == 0");
+		assertmsg("^1level.leaper_spawners.size == 0 or undefined");
 		return;
 	}
 	else
@@ -96,13 +96,14 @@ leaper_spawner_init()
 	}
 		
 
-	for ( i = 0; i < level.leaper_spawners.size; i++ )
+	for ( i = 0; isdefined(level.leaper_spawners) && i < level.leaper_spawners.size; i++ )
 	{
 		level.leaper_spawners[i].is_enabled = 1;
 		level.leaper_spawners[i].script_forcespawn = 1;
 	}
 
-	assert( level.leaper_spawners.size > 0 );
+	assert(level.leaper_spawners.size > 0 );
+	assert(isdefined(level.leaper_spawners) );
 	level.leaper_health = 100;
 	array_thread( level.leaper_spawners, ::add_spawn_function, ::leaper_init );
 /#
@@ -121,7 +122,7 @@ leaper_spawner_zone_check()
 
 	for ( i = 0; i < a_zones.size; i++ )
 	{
-		if ( level.zones[a_zones[i]].leaper_locations.size == 0 )
+		if ( !isdefined(level.zones[a_zones[i]].leaper_locations) || level.zones[a_zones[i]].leaper_locations.size == 0 )
 		{
 			n_zones_missing_spawners++;
 			str_zone_list = str_zone_list + "\\n " + a_zones[i];
