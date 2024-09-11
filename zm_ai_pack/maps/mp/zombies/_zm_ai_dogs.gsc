@@ -200,6 +200,7 @@ dog_round_start()
 	level.doground_nomusic = 1;
 	level notify( "dog_round_starting" );
 	clientnotify( "dog_start" );
+	clientnotify( "fog_start" );
 
 	if ( isdefined( level.dog_melee_range ) )
 		setdvar( "ai_meleeRange", level.dog_melee_range );
@@ -218,6 +219,7 @@ dog_round_stop()
 	level.doground_nomusic = 0;
 	level notify( "dog_round_ending" );
 	clientnotify( "dog_stop" );
+	clientnotify( "fog_stop" );
 	setdvar( "ai_meleeRange", level.melee_range_sav );
 	setdvar( "ai_meleeWidth", level.melee_width_sav );
 	setdvar( "ai_meleeHeight", level.melee_height_sav );

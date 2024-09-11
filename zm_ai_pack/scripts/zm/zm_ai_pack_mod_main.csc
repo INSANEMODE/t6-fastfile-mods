@@ -3,7 +3,11 @@
 //#include clientscripts\mp\zombies\_zm_ai_ghost;
 #include clientscripts\mp\zombies\_zm_ai_brutus;
 #include clientscripts\mp\zombies\_zm_ai_mechz;
-
+#include clientscripts\mp\_utility;
+#include clientscripts\mp\zombies\_zm_weapons;
+#include clientscripts\mp\zombies\_zm_utility;
+#include clientscripts\mp\zombies\_zm;
+#include clientscripts\mp\zombies\_zm_game_mode_objects;
 main()
 {
 	replaceFunc( clientscripts\mp\_visionset_mgr::init, ::visionset_mgr_init_override );
@@ -36,6 +40,8 @@ main()
 			level [[ level.ai_data[ keys[ i ] ].main ]]();
 		}
 	}
+	level thread fog_start_monitor();
+    level thread fog_stop_monitor();
 }
 
 init()
@@ -81,4 +87,34 @@ visionset_mgr_init_override()
 	[[ level.on_finalize_initialization_callback ]]( clientscripts\mp\_visionset_mgr::finalize_clientfields );
 	level thread clientscripts\mp\_visionset_mgr::monitor();
 	run_visionset_callbacks();
+}
+
+
+
+fog_start_monitor()
+{
+    while ( true )
+    {
+        level waittill( "fog_start" );
+        players = getlocalplayers();
+
+        for ( i = 0; i < players.size; i++ )
+            setworldfogactivebank( i, 2 );
+    }
+}
+
+fog_stop_monitor()
+{
+    while ( true )
+    {
+        level waittill( "fog_stop" );
+
+        if ( !isdefined( level.current_fog ) )
+            level.current_fog = 8;
+
+        players = getlocalplayers();
+
+        for ( i = 0; i < players.size; i++ )
+            setworldfogactivebank( i, level.current_fog );
+    }
 }

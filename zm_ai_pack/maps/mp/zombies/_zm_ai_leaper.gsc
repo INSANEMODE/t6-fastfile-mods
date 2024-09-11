@@ -700,13 +700,29 @@ leaper_round_start()
 	level thread maps\mp\zombies\_zm_audio::change_zombie_music( "dog_start" );
 	level thread leaper_round_start_audio();
 	level notify( "leaper_round_starting" );
-	clientnotify( "leaper_start" );
+	if(level.script == "zm_highrise")
+	{
+		clientnotify( "leaper_start" );		
+	}
+	else
+	{
+		clientnotify( "fog_start" );		
+	}
+
+
 }
 
 leaper_round_stop()
 {
 	level notify( "leaper_round_ending" );
-	clientnotify( "leaper_stop" );
+	if(level.script == "zm_highrise")
+	{
+		clientnotify( "leaper_stop" );		
+	}
+	else
+	{
+		clientnotify( "fog_stop" );		
+	}
 }
 
 leaper_traverse_watcher()

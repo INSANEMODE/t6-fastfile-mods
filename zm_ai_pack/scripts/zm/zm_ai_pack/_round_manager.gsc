@@ -12,7 +12,7 @@ main()
 	set_dvar_if_unset( "rm_min_rounds_before_special_round", 4 );
 	set_dvar_if_unset( "rm_max_rounds_before_special_round", 6 );
 	set_dvar_if_unset( "rm_special_round_chance", 33 );
-	set_dvar_if_unset( "rm_allow_same_round_as_last_round", 1 );
+	set_dvar_if_unset( "rm_allow_same_round_as_last_round", 0 );
 
 	set_dvar_if_unset( "rm_allowed_special_rounds", "normal zombie_dog mechz leaper brutus" );
 	set_dvar_if_unset( "rm_allowed_special_round_variants", "default rush" );
@@ -513,7 +513,7 @@ determine_current_round_type()
 		possible_variants_keys[ 0 ] = "default";
 	}
 
-	max_iterations = 50;
+	max_iterations = 150;
 	current_iterations = 0;
 
 	allow_repeats = getDvarInt( "rm_allow_same_round_as_last_round" ) != 0;
@@ -814,7 +814,7 @@ determine_mixed_round_preset()
 
 	allowed_presets_keys = strtok( allowed_presets_string, " " );
 
-	max_iterations = 50;
+	max_iterations = 150;
 	current_iterations = 0;
 
 	for (;;)

@@ -626,3 +626,14 @@ goto_round( target_round )
 	average_estimated_special_rounds = int( ( level.round_number - old_round_number ) / average );
 	level.special_round_count += average_estimated_special_rounds;
 }
+
+debug_anim_print( text )
+{
+/#
+    if ( level.dog_debug_anims )
+        println( text + " " + gettime() );
+
+    if ( level.dog_debug_anims_ent == self getentnum() )
+        println( text + " " + gettime() );
+#/
+}

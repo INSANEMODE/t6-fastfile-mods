@@ -2,19 +2,19 @@
 >type,fastfile
 >name,mod
 
->level.ipak_read,dlczm1
->level.ipak_read,dlczm2
->level.ipak_read,dlczm3
->level.ipak_read,dlczm4
+// >level.ipak_read,dlczm1
+// >level.ipak_read,dlczm2
+// >level.ipak_read,dlczm3
+// >level.ipak_read,dlczm4
 >level.ipak_read,patch_mp
 >level.ipak_read,mp
 >level.ipak_read,sp
 
 
-include,zm_ports_motd
-include,zm_ports_buried
-include,zm_ports_music
-include,zm_ports_main
+// include,zm_ports_motd
+// include,zm_ports_buried
+// include,zm_ports_music
+// include,zm_ports_main
 
 include,dependencies/camo_dragon_materials
 include,dependencies/camo_zmb_dlc2_materials
@@ -37,7 +37,6 @@ include,zm_prison
 include,zm_buried
 include,zm_tomb
 include,includes/images
-include,includes/materials
 
 
 include,zm_all_basic
