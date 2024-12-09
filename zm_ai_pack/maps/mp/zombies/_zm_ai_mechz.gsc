@@ -6,7 +6,7 @@
 #include maps\mp\zombies\_zm_net;
 #include maps\mp\zombies\_zm_utility;
 #include maps\mp\animscripts\zm_utility;
-#include maps\mp\zm_tomb_tank;
+//#include maps\mp\zm_tomb_tank;
 #include maps\mp\zombies\_zm_ai_mechz_dev;
 #include maps\mp\zombies\_zm_ai_mechz_claw;
 #include maps\mp\zombies\_zm_ai_mechz_ft;

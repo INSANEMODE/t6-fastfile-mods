@@ -741,7 +741,7 @@ zm_barricade_enter_crawl : aliased restart missing_legs notify barricade_enter_a
 	barrier_sprint_slide_l	ai_zombie_crawl_barricade_enter_sprint_l
 }
 
-////traverse anims, not all necessarily used on every level
+////traverse anims, not all necessarily used on every level 59
 zm_traverse : aliased restart notify traverse_anim
 {
 	jump_across_120					ai_zombie_jump_across_120

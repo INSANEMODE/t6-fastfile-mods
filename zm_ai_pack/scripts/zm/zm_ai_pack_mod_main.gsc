@@ -25,11 +25,11 @@ main()
 	pluto_sys::replacefunc( maps\mp\animscripts\zm_dog_combat::domeleeafterwait, ::domeleeafterwait_override );
 	pluto_sys::replacefunc( maps\mp\animscripts\zm_dog_combat::handlemeleebiteattacknotetracks, ::handlemeleebiteattacknotetracks_override );
 
-	if ( getdvarint( "fix_zombie_move_anim_randomizing_after_melee" ) )
-	{
+	//if ( getdvarint( "fix_zombie_move_anim_randomizing_after_melee" ) )
+	//{
 		pluto_sys::replacefunc( maps\mp\animscripts\zm_run::setanimstatefromspeed, ::setanimstatefromspeed_override );
 		pluto_sys::replacefunc( maps\mp\animscripts\zm_melee::set_zombie_melee_anim_state, ::set_zombie_melee_anim_state_override );
-	}
+	//}
 
 	level.script = toLower( getDvar( "mapname" ) );
 	level.gametype = toLower( getDvar( "g_gametype" ) );
@@ -280,11 +280,17 @@ dotraverse_teleport( no_powerups )
 
 	self sys::animmode( "none" );
 	self.is_traversing = false;
+	if ( isdefined(self) && self.ai_state != "find_flesh" )
+	{
+		self notify( "stop_find_flesh" );
+		self.ai_state = "find_flesh";
+		self thread maps\mp\zombies\_zm_ai_basic::find_flesh();
+	}
 }
 
 dotraverse_override( traversestate, traversealias, no_powerups )
 {
-	if ( !self HasAnimStateFromASD( traversestate ) || self getanimsubstatefromasd( traversestate, traversealias ) == -1 )
+	if ( !self HasAnimStateFromASD( traversestate ) || (!isdefined(self getanimsubstatefromasd( traversestate, traversealias )) || self getanimsubstatefromasd( traversestate, traversealias ) == -1 ))
 	{
 		self thread dotraverse_teleport( no_powerups );
 		return;
